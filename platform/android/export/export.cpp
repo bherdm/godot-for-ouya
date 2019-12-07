@@ -210,6 +210,7 @@ class EditorExportPlatformAndroid : public EditorExportPlatform {
 	String package;
 	String name;
 	String icon;
+	String ouya_icon;
 	String cmdline;
 	bool _signed;
 	bool apk_expansion;
@@ -312,6 +313,8 @@ bool EditorExportPlatformAndroid::_set(const StringName &p_name, const Variant &
 		name = p_value;
 	else if (n == "package/icon")
 		icon = p_value;
+	else if (n == "package/ouya_icon")
+		ouya_icon = p_value;
 	else if (n == "package/signed")
 		_signed = p_value;
 	else if (n == "architecture/arm")
@@ -389,6 +392,8 @@ bool EditorExportPlatformAndroid::_get(const StringName &p_name, Variant &r_ret)
 		r_ret = name;
 	else if (n == "package/icon")
 		r_ret = icon;
+	else if (n == "package/ouya_icon")
+		r_ret = ouya_icon;
 	else if (n == "package/signed")
 		r_ret = _signed;
 	else if (n == "architecture/arm")
@@ -451,6 +456,7 @@ void EditorExportPlatformAndroid::_get_property_list(List<PropertyInfo> *p_list)
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/unique_name"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/name"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/icon", PROPERTY_HINT_FILE, "png"));
+	p_list->push_back(PropertyInfo(Variant::STRING, "package/ouya_icon", PROPERTY_HINT_FILE, "png"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "package/signed"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "architecture/arm"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "architecture/arm64"));
@@ -1207,6 +1213,17 @@ Error EditorExportPlatformAndroid::export_project(const String &p_path, bool p_d
 						f->get_buffer(data.ptr(), data.size());
 						memdelete(f);
 					}
+				}
+			}
+		}
+		
+		if (file == "res/drawable-xhdpi-v4/ouya_icon.png") {
+			if (this->ouya_icon != "" && this->ouya_icon.ends_with(".png")) {
+				FileAccess *f = FileAccess::open(this->ouya_icon, FileAccess::READ);
+				if (f) {
+					data.resize(f->get_len());
+					f->get_buffer(data.ptr(), data.size());
+					memdelete(f);
 				}
 			}
 		}
