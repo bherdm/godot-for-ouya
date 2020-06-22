@@ -840,7 +840,7 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["TANGENT"] = "tangent_interp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["BINORMAL"] = "binormal_interp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV"] = "uv_interp.xy";
-	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV2"] = "uv_interp.zw";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV2"] = "uv2_interp.xy";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["COLOR"] = "color_interp";
 	//@TODO convert to glsl stuff
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SPEC_EXP"] = "vertex_specular_exp";
