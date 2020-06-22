@@ -904,6 +904,8 @@ const ShaderLanguage::IntrinsicFuncDef ShaderLanguage::intrinsic_func_defs[] = {
 	{ "texscreen", TYPE_VEC3, { TYPE_VEC2, TYPE_VOID } },
 	{ "texpos", TYPE_VEC3, { TYPE_VEC3, TYPE_VOID } },
 
+	{ "databone", TYPE_VOID, { TYPE_FLOAT, TYPE_VEC2, TYPE_VEC2, TYPE_VEC2, TYPE_VOID } },
+
 	{ NULL, TYPE_VOID, { TYPE_VOID } }
 
 };
@@ -1052,6 +1054,7 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::vertex_builtins_defs[] = {
 	{ "MODELVIEW_MATRIX", TYPE_MAT4 },
 	{ "INSTANCE_ID", TYPE_FLOAT },
 	{ "TIME", TYPE_FLOAT },
+	{ "USE_SKELETON_ASD", TYPE_BOOL },
 	{ NULL, TYPE_VOID },
 };
 const ShaderLanguage::BuiltinsDef ShaderLanguage::fragment_builtins_defs[] = {
