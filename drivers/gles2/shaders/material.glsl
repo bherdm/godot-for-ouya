@@ -203,7 +203,7 @@ VERTEX_SHADER_GLOBALS
 
 
 
-void readDataBone(in float boneIndex, highp out vec2 dstA, highp out vec2 dstB, highp out vec2 dstC)
+void readDataBone(in float boneIndex, out highp vec2 dstA, out highp vec2 dstB, out highp vec2 dstC)
 {
 #ifdef USE_SKELETON
 	highp mat4 m = mat4(
