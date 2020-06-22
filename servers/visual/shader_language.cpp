@@ -1055,6 +1055,7 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::vertex_builtins_defs[] = {
 	{ "INSTANCE_ID", TYPE_FLOAT },
 	{ "TIME", TYPE_FLOAT },
 	{ "USE_SKELETON_ASD", TYPE_BOOL },
+	{ "VIEWPORT_SIZE", TYPE_VEC2 },
 	{ NULL, TYPE_VOID },
 };
 const ShaderLanguage::BuiltinsDef ShaderLanguage::fragment_builtins_defs[] = {
@@ -1087,6 +1088,8 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::fragment_builtins_defs[] = {
 	//	{ "SCREEN_POS", TYPE_VEC2},
 	//	{ "SCREEN_TEXEL_SIZE", TYPE_VEC2},
 	{ "TIME", TYPE_FLOAT },
+
+	{ "VIEWPORT_SIZE", TYPE_VEC2 },
 	{ NULL, TYPE_VOID }
 
 };

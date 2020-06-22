@@ -6328,6 +6328,7 @@ void RasterizerGLES2::_render_list_forward(RenderList *p_render_list, const Tran
 			material_shader.set_uniform(MaterialShaderGLES2::PROJECTION_TRANSFORM, p_projection);
 			// TODO: vla Perhaps cache this
 			material_shader.set_uniform(MaterialShaderGLES2::PROJECTION_INVERSE_TRANSFORM, p_projection.inverse());
+			material_shader.set_uniform(MaterialShaderGLES2::VIEWPORT_SIZE, Vector2(viewport.width, viewport.height));
 			if (!shadow) {
 
 				if (!additive && current_env && current_env->fx_enabled[VS::ENV_FX_AMBIENT_LIGHT]) {

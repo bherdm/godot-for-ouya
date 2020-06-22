@@ -84,6 +84,7 @@ uniform highp mat4 world_transform;
 uniform highp mat4 camera_inverse_transform;
 uniform highp mat4 projection_transform;
 uniform highp mat4 projection_inverse_transform;
+uniform mediump vec2 viewport_size;
 
 #ifdef USE_UNIFORM_INSTANCING
 //shittiest form of instancing (but most compatible)
@@ -568,6 +569,8 @@ varying vec4 fog_interp;
 #endif
 
 /* Material Uniforms */
+
+uniform mediump vec2 viewport_size;
 
 #ifdef USE_VERTEX_LIGHTING
 

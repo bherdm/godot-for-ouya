@@ -854,6 +854,7 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VAR2"] = "var2_interp";
 	
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["USE_SKELETON_ASD"] = "use_skeleton_asd";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VIEWPORT_SIZE"] = "viewport_size";
 
 	//	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SCREEN_POS"]="SCREEN_POS";
 	//	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SCREEN_SIZE"]="SCREEN_SIZE";
@@ -887,6 +888,8 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["DISCARD"] = "discard_";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["POINT_COORD"] = "gl_PointCoord";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["INV_CAMERA_MATRIX"] = "camera_inverse_transform";
+
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VIEWPORT_SIZE"] = "viewport_size";
 
 	//mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["SCREEN_POS"]="SCREEN_POS";
 	//mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["SCREEN_TEXEL_SIZE"]="SCREEN_TEXEL_SIZE";
