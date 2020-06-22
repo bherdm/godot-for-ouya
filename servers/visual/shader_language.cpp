@@ -1048,6 +1048,7 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::vertex_builtins_defs[] = {
 	{ "WORLD_MATRIX", TYPE_MAT4 },
 	{ "INV_CAMERA_MATRIX", TYPE_MAT4 },
 	{ "PROJECTION_MATRIX", TYPE_MAT4 },
+	{ "INV_PROJECTION_MATRIX", TYPE_MAT4 },
 	{ "MODELVIEW_MATRIX", TYPE_MAT4 },
 	{ "INSTANCE_ID", TYPE_FLOAT },
 	{ "TIME", TYPE_FLOAT },

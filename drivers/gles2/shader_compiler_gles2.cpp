@@ -845,6 +845,7 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["WORLD_MATRIX"] = "world_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["INV_CAMERA_MATRIX"] = "camera_inverse_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["PROJECTION_MATRIX"] = "projection_transform";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["INV_PROJECTION_MATRIX"] = "projection_inverse_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["MODELVIEW_MATRIX"] = "modelview";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["POINT_SIZE"] = "gl_PointSize";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VAR1"] = "var1_interp";
