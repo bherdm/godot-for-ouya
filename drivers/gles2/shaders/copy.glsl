@@ -24,6 +24,14 @@ varying vec2 uv_interp;
 
 varying vec2 uv2_interp;
 
+#if defined(USE_FXAA)
+
+uniform vec2 pixel_size;
+varying vec4 fxaa1;
+varying vec4 fxaa2;
+
+#endif
+
 void main() {
 
 #ifdef USE_CUBEMAP
@@ -33,6 +41,11 @@ void main() {
 #endif
 	uv2_interp = uv2_in;
 	gl_Position = vertex_attrib;
+
+#if defined(USE_FXAA)
+	fxaa1 = vec4(uv_in + vec2(-1.0, -1.0) * pixel_size, uv_in + vec2(1.0, -1.0) * pixel_size);
+	fxaa2 = vec4(uv_in + vec2(-1.0, 1.0) * pixel_size, uv_in + vec2(1.0, 1.0) * pixel_size);
+#endif
 }
 
 [fragment]
@@ -123,6 +136,8 @@ uniform sampler2D source_vd_lum;
 #elif defined(USE_FXAA)
 
 uniform vec2 pixel_size;
+varying vec4 fxaa1;
+varying vec4 fxaa2;
 
 #endif
 
@@ -165,13 +180,13 @@ void main() {
 
 #define FXAA_REDUCE_MIN   (1.0/ 128.0)
 #define FXAA_REDUCE_MUL   (1.0 / 8.0)
-#define FXAA_SPAN_MAX     8.0
+#define FXAA_SPAN_MAX     1.0
 
 	{
-		vec3 rgbNW = texture2D(source, uv_interp + vec2(-1.0, -1.0) * pixel_size).xyz;
-		vec3 rgbNE = texture2D(source, uv_interp + vec2(1.0, -1.0) * pixel_size).xyz;
-		vec3 rgbSW = texture2D(source, uv_interp + vec2(-1.0, 1.0) * pixel_size).xyz;
-		vec3 rgbSE = texture2D(source, uv_interp + vec2(1.0, 1.0) * pixel_size).xyz;
+		vec3 rgbNW = texture2D(source, fxaa1.xy).rgb; //texture2D(source, uv_interp + vec2(-1.0, -1.0) * pixel_size).xyz;
+		vec3 rgbNE = texture2D(source, fxaa1.zw).rgb; //texture2D(source, uv_interp + vec2(1.0, -1.0) * pixel_size).xyz;
+		vec3 rgbSW = texture2D(source, fxaa2.xy).rgb; //texture2D(source, uv_interp + vec2(-1.0, 1.0) * pixel_size).xyz;
+		vec3 rgbSE = texture2D(source, fxaa2.zw).rgb; //texture2D(source, uv_interp + vec2(1.0, 1.0) * pixel_size).xyz;
 		vec3 rgbM  = color.rgb;
 		vec3 luma = vec3(0.299, 0.587, 0.114);
 		float lumaNW = dot(rgbNW, luma);
