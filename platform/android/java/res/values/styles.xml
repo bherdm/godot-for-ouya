@@ -21,5 +21,8 @@
     <style name="ButtonBackground">
         <item name="android:background">@android:color/background_dark</item>
     </style>
-
+	
+	<style name="BlankTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@android:color/black</item>
+    </style>
 </resources>
