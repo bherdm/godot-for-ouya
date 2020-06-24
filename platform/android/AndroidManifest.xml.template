@@ -25,7 +25,6 @@
                 <category android:name="tv.ouya.intent.category.GAME"/>
             </intent-filter>
         </activity>
-	<service android:name="org.godotengine.godot.GodotDownloaderService" />
 
 
   

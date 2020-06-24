@@ -345,12 +345,12 @@ bool EditorExportPlatformAndroid::_set(const StringName &p_name, const Variant &
 		release_username = p_value;
 	else if (n == "keystore/release_password")
 		release_password = p_value;
-	else if (n == "apk_expansion/enable")
+	/*else if (n == "apk_expansion/enable")
 		apk_expansion = p_value;
 	else if (n == "apk_expansion/SALT")
 		apk_expansion_salt = p_value;
 	else if (n == "apk_expansion/public_key")
-		apk_expansion_pkey = p_value;
+		apk_expansion_pkey = p_value;*/
 	else if (n.begins_with("permissions/")) {
 
 		String what = n.get_slicec('/', 1).to_upper();
@@ -424,12 +424,12 @@ bool EditorExportPlatformAndroid::_get(const StringName &p_name, Variant &r_ret)
 		r_ret = release_username;
 	else if (n == "keystore/release_password")
 		r_ret = release_password;
-	else if (n == "apk_expansion/enable")
+	/*else if (n == "apk_expansion/enable")
 		r_ret = apk_expansion;
 	else if (n == "apk_expansion/SALT")
 		r_ret = apk_expansion_salt;
 	else if (n == "apk_expansion/public_key")
-		r_ret = apk_expansion_pkey;
+		r_ret = apk_expansion_pkey;*/
 	else if (n.begins_with("permissions/")) {
 
 		String what = n.get_slicec('/', 1).to_upper();
@@ -472,9 +472,9 @@ void EditorExportPlatformAndroid::_get_property_list(List<PropertyInfo> *p_list)
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release", PROPERTY_HINT_GLOBAL_FILE, "keystore"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release_user"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release_password"));
-	p_list->push_back(PropertyInfo(Variant::BOOL, "apk_expansion/enable"));
+	/*p_list->push_back(PropertyInfo(Variant::BOOL, "apk_expansion/enable"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/SALT"));
-	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/public_key", PROPERTY_HINT_MULTILINE_TEXT));
+	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/public_key", PROPERTY_HINT_MULTILINE_TEXT));*/
 
 	const char **perms = android_perms;
 	while (*perms) {
