@@ -1,6 +1,6 @@
 short_name = "godot"
-name = "Godot Engine"
-major = 2
+name = "Godot for OUYA"
+major = 0
 minor = 1
-patch = 7
-status = "rc"
+patch = 0
+status = "alpha"
