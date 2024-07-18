@@ -64,8 +64,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.godotengine.godot.payments.PaymentsManager;
-
 import java.io.IOException;
 
 import android.provider.Settings.Secure;
@@ -80,24 +78,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.LinkedList;
 
-import com.google.android.vending.expansion.downloader.Constants;
-import com.google.android.vending.expansion.downloader.DownloadProgressInfo;
-import com.google.android.vending.expansion.downloader.DownloaderClientMarshaller;
-import com.google.android.vending.expansion.downloader.DownloaderServiceMarshaller;
-import com.google.android.vending.expansion.downloader.Helpers;
-import com.google.android.vending.expansion.downloader.IDownloaderClient;
-import com.google.android.vending.expansion.downloader.IDownloaderService;
-import com.google.android.vending.expansion.downloader.IStub;
-
 import android.os.Bundle;
 import android.os.Messenger;
 import android.os.SystemClock;
 
-public class Godot extends Activity implements SensorEventListener, IDownloaderClient {
+public class Godot extends Activity implements SensorEventListener {
 	private static final String TAG = "Godot";
 	static final int MAX_SINGLETONS = 64;
-	private IStub mDownloaderClientStub;
-	private IDownloaderService mRemoteService;
 	private TextView mStatusText;
 	private TextView mProgressFraction;
 	private TextView mProgressPercent;
@@ -127,20 +114,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 
 	static public Intent getCurrentIntent() {
 		return mCurrentIntent;
-	}
-
-	private void setState(int newState) {
-		if (mState != newState) {
-			mState = newState;
-			mStatusText.setText(Helpers.getDownloaderStringResourceIDFromState(newState));
-		}
-	}
-
-	private void setButtonPausedState(boolean paused) {
-		mStatePaused = paused;
-		int stringResourceID = paused ? com.godot.game.R.string.text_button_resume :
-										com.godot.game.R.string.text_button_pause;
-		mPauseButton.setText(stringResourceID);
 	}
 
 	static public class SingletonBase {
@@ -222,13 +195,9 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 	;
 	public ResultCallback result_callback;
 
-	private PaymentsManager mPaymentsManager = null;
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == PaymentsManager.REQUEST_CODE_FOR_PURCHASE) {
-			mPaymentsManager.processPurchaseResponse(resultCode, data);
-		} else if (result_callback != null) {
+		if (result_callback != null) {
 			result_callback.callback(requestCode, resultCode, data);
 			result_callback = null;
 		};
@@ -389,16 +358,7 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 
 		result_callback = null;
 
-		mPaymentsManager = PaymentsManager.createManager(this);
-
-		mPaymentsManager.initService();
 		godot_initialized = true;
-	}
-
-	@Override
-	public void onServiceConnected(Messenger m) {
-		mRemoteService = DownloaderServiceMarshaller.CreateProxy(m);
-		mRemoteService.onClientUpdated(mDownloaderClientStub.getMessenger());
 	}
 
 	@Override
@@ -415,9 +375,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 		if (true) {
 			boolean md5mismatch = false;
 			command_line = getCommandLine();
-			boolean use_apk_expansion = false;
-			String main_pack_md5 = null;
-			String main_pack_key = null;
 
 			List<String> new_args = new LinkedList<String>();
 
@@ -436,19 +393,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 
 						UiChangeListener();
 					}
-				} else if (command_line[i].equals("-use_apk_expansion")) {
-					use_apk_expansion = true;
-				} else if (has_extra && command_line[i].equals("-apk_expansion_md5")) {
-					main_pack_md5 = command_line[i + 1];
-					i++;
-				} else if (has_extra && command_line[i].equals("-apk_expansion_key")) {
-					main_pack_key = command_line[i + 1];
-					SharedPreferences prefs = getSharedPreferences("app_data_keys", MODE_PRIVATE);
-					Editor editor = prefs.edit();
-					editor.putString("store_public_key", main_pack_key);
-
-					editor.commit();
-					i++;
 				} else if (command_line[i].trim().length() != 0) {
 					new_args.add(command_line[i]);
 				}
@@ -460,89 +404,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 
 				command_line = new_args.toArray(new String[new_args.size()]);
 			}
-			if (use_apk_expansion && main_pack_md5 != null && main_pack_key != null) {
-				//check that environment is ok!
-				if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-					Log.d(TAG, "**ERROR! No media mounted!");
-					//show popup and die
-				}
-
-				// Build the full path to the app's expansion files
-				try {
-					expansion_pack_path = Helpers.getSaveFilePath(getApplicationContext());
-					expansion_pack_path += "/"
-										   + "main." + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + "." + this.getPackageName() + ".obb";
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				File f = new File(expansion_pack_path);
-
-				boolean pack_valid = true;
-				Log.d(TAG, "**PACK** - Path " + expansion_pack_path);
-
-				if (!f.exists()) {
-
-					pack_valid = false;
-					Log.d(TAG, "**PACK** - File does not exist");
-
-				} else if (obbIsCorrupted(expansion_pack_path, main_pack_md5)) {
-					Log.d(TAG, "**PACK** - Expansion pack (obb) is corrupted");
-					pack_valid = false;
-					try {
-						f.delete();
-					} catch (Exception e) {
-						Log.d(TAG, "**PACK** - Error deleting corrupted expansion pack (obb)");
-					}
-				}
-
-				if (!pack_valid) {
-					Log.d(TAG, "Pack Invalid, try re-downloading.");
-
-					Intent notifierIntent = new Intent(this, this.getClass());
-					notifierIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-											Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-					PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
-							notifierIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-					int startResult;
-					try {
-						Log.d(TAG, "INITIALIZING DOWNLOAD");
-						startResult = DownloaderClientMarshaller.startDownloadServiceIfRequired(
-								getApplicationContext(),
-								pendingIntent,
-								GodotDownloaderService.class);
-						Log.d(TAG, "DOWNLOAD SERVICE FINISHED:" + startResult);
-
-						if (startResult != DownloaderClientMarshaller.NO_DOWNLOAD_REQUIRED) {
-							Log.d(TAG, "DOWNLOAD REQUIRED");
-							// This is where you do set up to display the download
-							// progress (next step)
-							mDownloaderClientStub = DownloaderClientMarshaller.CreateStub(this,
-									GodotDownloaderService.class);
-
-							setContentView(com.godot.game.R.layout.downloading_expansion);
-							mPB = (ProgressBar)findViewById(com.godot.game.R.id.progressBar);
-							mStatusText = (TextView)findViewById(com.godot.game.R.id.statusText);
-							mProgressFraction = (TextView)findViewById(com.godot.game.R.id.progressAsFraction);
-							mProgressPercent = (TextView)findViewById(com.godot.game.R.id.progressAsPercentage);
-							mAverageSpeed = (TextView)findViewById(com.godot.game.R.id.progressAverageSpeed);
-							mTimeRemaining = (TextView)findViewById(com.godot.game.R.id.progressTimeRemaining);
-							mDashboard = findViewById(com.godot.game.R.id.downloaderDashboard);
-							mCellMessage = findViewById(com.godot.game.R.id.approveCellular);
-							mPauseButton = (Button)findViewById(com.godot.game.R.id.pauseButton);
-							mWiFiSettingsButton = (Button)findViewById(com.godot.game.R.id.wifiSettingsButton);
-
-							return;
-						} else {
-							Log.d(TAG, "NO DOWNLOAD REQUIRED");
-						}
-					} catch (NameNotFoundException e) {
-						Log.w(TAG, "Error downloading expansion package:" + e.getMessage());
-					}
-				}
-			}
 		}
 
 		mCurrentIntent = getIntent();
@@ -553,7 +414,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 	@Override
 	protected void onDestroy() {
 
-		if (mPaymentsManager != null) mPaymentsManager.destroy();
 		for (int i = 0; i < singleton_count; i++) {
 			singletons[i].onMainDestroy();
 		}
@@ -564,9 +424,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 	protected void onPause() {
 		super.onPause();
 		if (!godot_initialized) {
-			if (null != mDownloaderClientStub) {
-				mDownloaderClientStub.disconnect(this);
-			}
 			return;
 		}
 		mView.onPause();
@@ -600,9 +457,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 	protected void onResume() {
 		super.onResume();
 		if (!godot_initialized) {
-			if (null != mDownloaderClientStub) {
-				mDownloaderClientStub.connect(this);
-			}
 			return;
 		}
 
@@ -820,120 +674,6 @@ public class Godot extends Activity implements SensorEventListener, IDownloaderC
 
 	private void queueEvent(Runnable runnable) {
 		// TODO Auto-generated method stub
-	}
-
-	public PaymentsManager getPaymentsManager() {
-		return mPaymentsManager;
-	}
-
-	// Audio
-
-	/**
-     * The download state should trigger changes in the UI --- it may be useful
-     * to show the state as being indeterminate at times. This sample can be
-     * considered a guideline.
-     */
-	@Override
-	public void onDownloadStateChanged(int newState) {
-		Log.d(TAG, "onDownloadStateChanged:" + newState);
-		setState(newState);
-		boolean showDashboard = true;
-		boolean showCellMessage = false;
-		boolean paused;
-		boolean indeterminate;
-		switch (newState) {
-			case IDownloaderClient.STATE_IDLE:
-				Log.d(TAG, "Download state changed to: STATE IDLE");
-				// STATE_IDLE means the service is listening, so it's
-				// safe to start making calls via mRemoteService.
-				paused = false;
-				indeterminate = true;
-				break;
-			case IDownloaderClient.STATE_CONNECTING:
-			case IDownloaderClient.STATE_FETCHING_URL:
-				Log.d(TAG, "Download state changed to: STATE CONNECTION / FETCHING URL");
-				showDashboard = true;
-				paused = false;
-				indeterminate = true;
-				break;
-			case IDownloaderClient.STATE_DOWNLOADING:
-				Log.d(TAG, "Download state changed to: STATE DOWNLOADING");
-				paused = false;
-				showDashboard = true;
-				indeterminate = false;
-				break;
-
-			case IDownloaderClient.STATE_FAILED_CANCELED:
-			case IDownloaderClient.STATE_FAILED:
-			case IDownloaderClient.STATE_FAILED_FETCHING_URL:
-			case IDownloaderClient.STATE_FAILED_UNLICENSED:
-				Log.d(TAG, "Download state changed to: MANY TYPES OF FAILING");
-				paused = true;
-				showDashboard = false;
-				indeterminate = false;
-				break;
-			case IDownloaderClient.STATE_PAUSED_NEED_CELLULAR_PERMISSION:
-			case IDownloaderClient.STATE_PAUSED_WIFI_DISABLED_NEED_CELLULAR_PERMISSION:
-				Log.d(TAG, "Download state changed to: PAUSED FOR NETWORK PERMISSION NEEDED");
-				showDashboard = false;
-				paused = true;
-				indeterminate = false;
-				showCellMessage = true;
-				break;
-
-			case IDownloaderClient.STATE_PAUSED_BY_REQUEST:
-				Log.d(TAG, "Download state changed to: PAUSED BY USER");
-				paused = true;
-				indeterminate = false;
-				break;
-			case IDownloaderClient.STATE_PAUSED_ROAMING:
-			case IDownloaderClient.STATE_PAUSED_SDCARD_UNAVAILABLE:
-				Log.d(TAG, "Download state changed to: PAUSED BY ROAMING");
-				paused = true;
-				indeterminate = false;
-				break;
-			case IDownloaderClient.STATE_COMPLETED:
-				Log.d(TAG, "Download state changed to: COMPLETED");
-				showDashboard = false;
-				paused = false;
-				indeterminate = false;
-				initializeGodot();
-				return;
-			default:
-				Log.w(TAG, "Invalid download state");
-
-				paused = true;
-				indeterminate = true;
-				showDashboard = true;
-		}
-		int newDashboardVisibility = showDashboard ? View.VISIBLE : View.GONE;
-		if (mDashboard.getVisibility() != newDashboardVisibility) {
-			mDashboard.setVisibility(newDashboardVisibility);
-		}
-		int cellMessageVisibility = showCellMessage ? View.VISIBLE : View.GONE;
-		if (mCellMessage.getVisibility() != cellMessageVisibility) {
-			mCellMessage.setVisibility(cellMessageVisibility);
-		}
-
-		mPB.setIndeterminate(indeterminate);
-		setButtonPausedState(paused);
-	}
-
-	@Override
-	public void onDownloadProgress(DownloadProgressInfo progress) {
-		mAverageSpeed.setText(getString(com.godot.game.R.string.kilobytes_per_second,
-				Helpers.getSpeedString(progress.mCurrentSpeed)));
-		mTimeRemaining.setText(getString(com.godot.game.R.string.time_remaining,
-				Helpers.getTimeRemaining(progress.mTimeRemaining)));
-
-		progress.mOverallTotal = progress.mOverallTotal;
-		mPB.setMax((int)(progress.mOverallTotal >> 8));
-		mPB.setProgress((int)(progress.mOverallProgress >> 8));
-		mProgressPercent.setText(Long.toString(progress.mOverallProgress * 100 /
-											   progress.mOverallTotal) +
-								 "%");
-		mProgressFraction.setText(Helpers.getDownloadProgressString(progress.mOverallProgress,
-				progress.mOverallTotal));
 	}
 
 	public void emitErrorSignal(final String type, final String functionName, final String details, final String filename, final int line) {

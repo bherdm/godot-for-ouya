@@ -83,6 +83,8 @@ uniform highp sampler2D instance_matrices;
 uniform highp mat4 world_transform;
 uniform highp mat4 camera_inverse_transform;
 uniform highp mat4 projection_transform;
+uniform highp mat4 projection_inverse_transform;
+uniform mediump vec2 viewport_size;
 
 #ifdef USE_UNIFORM_INSTANCING
 //shittiest form of instancing (but most compatible)
@@ -201,6 +203,21 @@ VERTEX_SHADER_GLOBALS
 
 
 
+void readDataBone(in float boneIndex, out highp vec2 dstA, out highp vec2 dstB, out highp vec2 dstC)
+{
+#ifdef USE_SKELETON
+	highp mat4 m = mat4(
+			texture2D(skeleton_matrices, vec2((boneIndex * 3.0 + 0.0) * skeltex_pixel_size,0.0)),
+			texture2D(skeleton_matrices, vec2((boneIndex * 3.0 + 1.0) * skeltex_pixel_size,0.0)),
+			texture2D(skeleton_matrices, vec2((boneIndex * 3.0 + 2.0) * skeltex_pixel_size,0.0)),
+			vec4(0.0, 0.0, 0.0, 1.0)
+	);
+	dstA = vec2(m[0][3], m[1][3]);
+	dstB = vec2(m[2][3], m[0][0]);
+	dstC = vec2(m[1][1], m[2][2]);
+#endif
+}
+
 
 void main() {
 #ifdef USE_UNIFORM_INSTANCING
@@ -266,7 +283,7 @@ void main() {
 #endif
 
 #ifdef USE_SKELETON
-
+	const bool use_skeleton_asd = true;
 	{
 		//skeleton transform
 		highp mat4 m=mat4(texture2D(skeleton_matrices,vec2((bone_indices.x*3.0+0.0)*skeltex_pixel_size,0.0)),texture2D(skeleton_matrices,vec2((bone_indices.x*3.0+1.0)*skeltex_pixel_size,0.0)),texture2D(skeleton_matrices,vec2((bone_indices.x*3.0+2.0)*skeltex_pixel_size,0.0)),vec4(0.0,0.0,0.0,1.0))*bone_weights.x;
@@ -280,7 +297,8 @@ void main() {
 		tangent_in = (vec4(tangent_in,0.0) * m).xyz;
 #endif
 	}
-
+#else
+	const bool use_skeleton_asd = false;
 #endif
 
 #ifdef ENABLE_AMBIENT_OCTREE
@@ -551,6 +569,8 @@ varying vec4 fog_interp;
 #endif
 
 /* Material Uniforms */
+
+uniform mediump vec2 viewport_size;
 
 #ifdef USE_VERTEX_LIGHTING
 

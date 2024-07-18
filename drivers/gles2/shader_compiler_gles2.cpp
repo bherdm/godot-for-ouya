@@ -826,6 +826,8 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	replace_table["texcube"] = "textureCube";
 	replace_table["texscreen"] = "texscreen";
 	replace_table["texpos"] = "texpos";
+	
+	replace_table["databone"] = "readDataBone";
 
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SRC_VERTEX"] = "vertex_in.xyz";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SRC_NORMAL"] = "normal_in";
@@ -838,17 +840,21 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["TANGENT"] = "tangent_interp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["BINORMAL"] = "binormal_interp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV"] = "uv_interp.xy";
-	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV2"] = "uv_interp.zw";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["UV2"] = "uv2_interp.xy";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["COLOR"] = "color_interp";
 	//@TODO convert to glsl stuff
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SPEC_EXP"] = "vertex_specular_exp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["WORLD_MATRIX"] = "world_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["INV_CAMERA_MATRIX"] = "camera_inverse_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["PROJECTION_MATRIX"] = "projection_transform";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["INV_PROJECTION_MATRIX"] = "projection_inverse_transform";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["MODELVIEW_MATRIX"] = "modelview";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["POINT_SIZE"] = "gl_PointSize";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VAR1"] = "var1_interp";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VAR2"] = "var2_interp";
+	
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["USE_SKELETON_ASD"] = "use_skeleton_asd";
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VIEWPORT_SIZE"] = "viewport_size";
 
 	//	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SCREEN_POS"]="SCREEN_POS";
 	//	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["SCREEN_SIZE"]="SCREEN_SIZE";
@@ -882,6 +888,8 @@ ShaderCompilerGLES2::ShaderCompilerGLES2() {
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["DISCARD"] = "discard_";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["POINT_COORD"] = "gl_PointCoord";
 	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["INV_CAMERA_MATRIX"] = "camera_inverse_transform";
+
+	mode_replace_table[ShaderLanguage::SHADER_MATERIAL_VERTEX]["VIEWPORT_SIZE"] = "viewport_size";
 
 	//mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["SCREEN_POS"]="SCREEN_POS";
 	//mode_replace_table[ShaderLanguage::SHADER_MATERIAL_FRAGMENT]["SCREEN_TEXEL_SIZE"]="SCREEN_TEXEL_SIZE";

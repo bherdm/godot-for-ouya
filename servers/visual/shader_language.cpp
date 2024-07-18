@@ -904,6 +904,8 @@ const ShaderLanguage::IntrinsicFuncDef ShaderLanguage::intrinsic_func_defs[] = {
 	{ "texscreen", TYPE_VEC3, { TYPE_VEC2, TYPE_VOID } },
 	{ "texpos", TYPE_VEC3, { TYPE_VEC3, TYPE_VOID } },
 
+	{ "databone", TYPE_VOID, { TYPE_FLOAT, TYPE_VEC2, TYPE_VEC2, TYPE_VEC2, TYPE_VOID } },
+
 	{ NULL, TYPE_VOID, { TYPE_VOID } }
 
 };
@@ -1048,9 +1050,12 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::vertex_builtins_defs[] = {
 	{ "WORLD_MATRIX", TYPE_MAT4 },
 	{ "INV_CAMERA_MATRIX", TYPE_MAT4 },
 	{ "PROJECTION_MATRIX", TYPE_MAT4 },
+	{ "INV_PROJECTION_MATRIX", TYPE_MAT4 },
 	{ "MODELVIEW_MATRIX", TYPE_MAT4 },
 	{ "INSTANCE_ID", TYPE_FLOAT },
 	{ "TIME", TYPE_FLOAT },
+	{ "USE_SKELETON_ASD", TYPE_BOOL },
+	{ "VIEWPORT_SIZE", TYPE_VEC2 },
 	{ NULL, TYPE_VOID },
 };
 const ShaderLanguage::BuiltinsDef ShaderLanguage::fragment_builtins_defs[] = {
@@ -1083,6 +1088,8 @@ const ShaderLanguage::BuiltinsDef ShaderLanguage::fragment_builtins_defs[] = {
 	//	{ "SCREEN_POS", TYPE_VEC2},
 	//	{ "SCREEN_TEXEL_SIZE", TYPE_VEC2},
 	{ "TIME", TYPE_FLOAT },
+
+	{ "VIEWPORT_SIZE", TYPE_VEC2 },
 	{ NULL, TYPE_VOID }
 
 };

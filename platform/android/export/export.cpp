@@ -210,6 +210,7 @@ class EditorExportPlatformAndroid : public EditorExportPlatform {
 	String package;
 	String name;
 	String icon;
+	String ouya_icon;
 	String cmdline;
 	bool _signed;
 	bool apk_expansion;
@@ -312,6 +313,8 @@ bool EditorExportPlatformAndroid::_set(const StringName &p_name, const Variant &
 		name = p_value;
 	else if (n == "package/icon")
 		icon = p_value;
+	else if (n == "package/ouya_icon")
+		ouya_icon = p_value;
 	else if (n == "package/signed")
 		_signed = p_value;
 	else if (n == "architecture/arm")
@@ -342,12 +345,12 @@ bool EditorExportPlatformAndroid::_set(const StringName &p_name, const Variant &
 		release_username = p_value;
 	else if (n == "keystore/release_password")
 		release_password = p_value;
-	else if (n == "apk_expansion/enable")
+	/*else if (n == "apk_expansion/enable")
 		apk_expansion = p_value;
 	else if (n == "apk_expansion/SALT")
 		apk_expansion_salt = p_value;
 	else if (n == "apk_expansion/public_key")
-		apk_expansion_pkey = p_value;
+		apk_expansion_pkey = p_value;*/
 	else if (n.begins_with("permissions/")) {
 
 		String what = n.get_slicec('/', 1).to_upper();
@@ -389,6 +392,8 @@ bool EditorExportPlatformAndroid::_get(const StringName &p_name, Variant &r_ret)
 		r_ret = name;
 	else if (n == "package/icon")
 		r_ret = icon;
+	else if (n == "package/ouya_icon")
+		r_ret = ouya_icon;
 	else if (n == "package/signed")
 		r_ret = _signed;
 	else if (n == "architecture/arm")
@@ -419,12 +424,12 @@ bool EditorExportPlatformAndroid::_get(const StringName &p_name, Variant &r_ret)
 		r_ret = release_username;
 	else if (n == "keystore/release_password")
 		r_ret = release_password;
-	else if (n == "apk_expansion/enable")
+	/*else if (n == "apk_expansion/enable")
 		r_ret = apk_expansion;
 	else if (n == "apk_expansion/SALT")
 		r_ret = apk_expansion_salt;
 	else if (n == "apk_expansion/public_key")
-		r_ret = apk_expansion_pkey;
+		r_ret = apk_expansion_pkey;*/
 	else if (n.begins_with("permissions/")) {
 
 		String what = n.get_slicec('/', 1).to_upper();
@@ -451,6 +456,7 @@ void EditorExportPlatformAndroid::_get_property_list(List<PropertyInfo> *p_list)
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/unique_name"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/name"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "package/icon", PROPERTY_HINT_FILE, "png"));
+	p_list->push_back(PropertyInfo(Variant::STRING, "package/ouya_icon", PROPERTY_HINT_FILE, "png"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "package/signed"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "architecture/arm"));
 	p_list->push_back(PropertyInfo(Variant::BOOL, "architecture/arm64"));
@@ -466,9 +472,9 @@ void EditorExportPlatformAndroid::_get_property_list(List<PropertyInfo> *p_list)
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release", PROPERTY_HINT_GLOBAL_FILE, "keystore"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release_user"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "keystore/release_password"));
-	p_list->push_back(PropertyInfo(Variant::BOOL, "apk_expansion/enable"));
+	/*p_list->push_back(PropertyInfo(Variant::BOOL, "apk_expansion/enable"));
 	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/SALT"));
-	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/public_key", PROPERTY_HINT_MULTILINE_TEXT));
+	p_list->push_back(PropertyInfo(Variant::STRING, "apk_expansion/public_key", PROPERTY_HINT_MULTILINE_TEXT));*/
 
 	const char **perms = android_perms;
 	while (*perms) {
@@ -1210,6 +1216,17 @@ Error EditorExportPlatformAndroid::export_project(const String &p_path, bool p_d
 				}
 			}
 		}
+		
+		if (file == "res/drawable-xhdpi-v4/ouya_icon.png") {
+			if (this->ouya_icon != "" && this->ouya_icon.ends_with(".png")) {
+				FileAccess *f = FileAccess::open(this->ouya_icon, FileAccess::READ);
+				if (f) {
+					data.resize(f->get_len());
+					f->get_buffer(data.ptr(), data.size());
+					memdelete(f);
+				}
+			}
+		}
 
 		if (file == "lib/x86/libgodot_android.so" && !export_x86) {
 			skip = true;
@@ -1387,9 +1404,11 @@ Error EditorExportPlatformAndroid::export_project(const String &p_path, bool p_d
 
 		List<String> args;
 		args.push_back("-digestalg");
-		args.push_back("SHA-256");
+		//args.push_back("SHA-256");
+		args.push_back("SHA1");
 		args.push_back("-sigalg");
-		args.push_back("SHA256withRSA");
+		//args.push_back("SHA256withRSA");
+		args.push_back("SHA1withRSA");
 		String tsa_url = EditorSettings::get_singleton()->get("android/timestamping_authority_url");
 		if (tsa_url != "") {
 			args.push_back("-tsa");
