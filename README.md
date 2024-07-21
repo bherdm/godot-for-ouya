@@ -84,7 +84,7 @@ Set the OUYA icon. The OUYA icon should be a 732x412 PNG imported into the proje
 
 ## Compiling the Engine
 
-Follow this guide to compile the engine and export templates from source. 
+Follow this guide to compile the engine and export templates from source.
 
 <details> 
   <summary>All Downloads</summary>
@@ -273,26 +273,26 @@ If these did not appear in the Start Menu after installing, refer to the officia
 
 ### About the Developer/Tools Command Prompts and the Visual C++ compiler
 
-There is a few things you need to know about these consoles and the
+There are a few things you need to know about these consoles and the
 Visual C++ compiler.
 
 Your Visual Studio installation will ship with several Visual C++
 compilers, them being more or less identical, however each cl.exe
 (Visual C++ compiler) will compile Godot for a different architecture
-(32 or 64 bit, ARM compiler is not supported).
+(32 or 64-bit, ARM compiler is not supported).
 
-The **Developer Command Prompt** will build a 32 bit version of Godot by
-using the 32 bit Visual C++ compiler.
+The **Developer Command Prompt** will build a 32-bit version of Godot by
+using the 32-bit Visual C++ compiler.
 
 **Native Tools** Prompts (mentioned above) are used when you want the
-32bit cl.exe to compile a 32 bit executable (x86 Native Tools
-Command Prompt). For the 64 bit cl.exe, it will compile a 64 bit
+32-bit cl.exe to compile a 32-bit executable (x86 Native Tools
+Command Prompt). For the 64-bit cl.exe, it will compile a 64-bit
 executable (x64 Native Tools Command Prompt).
 
 The **Cross Tools** are used when your Windows is using one architecture
-(32 bit, for example) and you need to compile to a different
-architecture (64 bit). As you might be familiar, 32 bit Windows can not
-run 64 bit executables, but you still might need to compile for them.
+(32-bit, for example) and you need to compile to a different
+architecture (64-bit). As you might be familiar, 32-bit Windows can not
+run 64-bit executables, but you still might need to compile for them.
 </details>
 
 ### Running SCons
@@ -324,7 +324,18 @@ scons platform=windows bits=32
 
 ```
 scons platform=osx target=release_debug bits=64
+
+cp -r misc/dist/osx_tools.app ./godot-for-ouya.app
+mkdir -p godot-for-ouya.app/Contents/MacOS
+cp bin/godot.osx.opt.tools.64 godot-for-ouya.app/Contents/MacOS/Godot
+chmod +x godot-for-ouya.app/Contents/MacOS/Godot
+
 scons platform=osx target=release_debug bits=32
+
+cp -r misc/dist/osx_tools.app ./godot-for-ouya.app
+mkdir -p godot-for-ouya.app/Contents/MacOS
+cp bin/godot.osx.opt.tools.32 godot-for-ouya.app/Contents/MacOS/Godot
+chmod +x godot-for-ouya.app/Contents/MacOS/Godot
 ```
 
 #### Android Templates
@@ -415,6 +426,3 @@ as well.
 There are also a number of other learning resources provided by the community,
 such as text and video tutorials, demos, etc. Consult the [community channels](https://godotengine.org/community)
 for more info.
-
-[![Build Status](https://travis-ci.org/godotengine/godot.svg?branch=master)](https://travis-ci.org/godotengine/godot)
-[![Code Triagers Badge](https://www.codetriage.com/godotengine/godot/badges/users.svg)](https://www.codetriage.com/godotengine/godot)
