@@ -55,7 +55,7 @@ Android needs a debug keystore file to install to devices and distribute non-rel
 
 If you can’t find it or need to generate one, the keytool command from the JDK can be used for this purpose.
 
-On Windows, use Powershell , opened as administrator.
+On Windows, use Powershell, opened as administrator.
 
 On Mac, precede this command with ```sudo```.
 
@@ -84,7 +84,7 @@ Set the OUYA icon. The OUYA icon should be a 732x412 PNG imported into the proje
 
 ## Compiling the Engine
 
-Compiling the Godot-for-OUYA editor and Android template APKs on Windows.
+Follow this guide to compile the engine and export templates from source. 
 
 <details> 
   <summary>All Downloads</summary>
@@ -94,21 +94,27 @@ OpenJDK 8<br>
 
 Android SDK Command Line Tools v8.0<br>[Windows](https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zi") - [Mac](https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip")
 
-Visual Studio Community 2022<br>
-https://visualstudio.microsoft.com/vs/community/
-
 Python 2.7.18 32-bit<br>
 https://www.python.org/downloads/release/python-2718/
-
-Pywin32 Python Extension<br>
-(pywin32-221.win32-py2.7.exe)<br>
-https://sourceforge.net/projects/pywin32/files/pywin32/Build%20221/
 
 SCons 2.5.1<br>
 https://sourceforge.net/projects/scons/files/scons/2.5.1/scons-2.5.1.zip/download
 
 Godot-for-OUYA Source<br>
 https://github.com/bherdm/godot-for-ouya.git
+
+**Windows-Specific:**<br>
+Visual Studio Community 2022<br>
+https://visualstudio.microsoft.com/vs/community/
+
+Pywin32 Python Extension<br>
+(pywin32-221.win32-py2.7.exe)<br>
+https://sourceforge.net/projects/pywin32/files/pywin32/Build%20221/
+
+**Mac OS-Specific:**<br>
+Xcode<br>
+https://developer.apple.com/download/
+
 </details>
 
 ### JDK 8
@@ -241,6 +247,8 @@ Update environment variables in terminal:
 ```
 source ~/.bash_profile
 ```
+
+</details>
 
 ## Compiling
 
