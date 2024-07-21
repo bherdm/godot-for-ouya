@@ -219,6 +219,8 @@ Bonus: Once you have homebrew, build and install the latest version of git. This
 brew install git
 ```
 
+</details>
+
 #### Environment Variables
 
 Create the variables file:
@@ -247,8 +249,6 @@ Update environment variables in terminal:
 ```
 source ~/.bash_profile
 ```
-
-</details>
 
 ## Compiling
 
