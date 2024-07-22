@@ -6,11 +6,11 @@
    height="1024"
    id="svg3030"
    version="1.1"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
    sodipodi:docname="icon.svg"
-   inkscape:export-filename="icon_64x64.png"
-   inkscape:export-xdpi="6"
-   inkscape:export-ydpi="6"
+   inkscape:export-filename="icon_1024x1024.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -21,6 +21,29 @@
    xmlns:dc="http://purl.org/dc/elements/1.1/">
   <defs
      id="defs3032">
+    <linearGradient
+       id="linearGradient46-1">
+      <stop
+         style="stop-color:#ef4d20;stop-opacity:1;"
+         offset="0"
+         id="stop30" />
+      <stop
+         style="stop-color:#969497;stop-opacity:1;"
+         offset="1"
+         id="stop31" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient27"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#b7b7b7;stop-opacity:0.23639802;"
+         offset="0"
+         id="stop27" />
+      <stop
+         style="stop-color:#b7b7b7;stop-opacity:0;"
+         offset="1"
+         id="stop28" />
+    </linearGradient>
     <linearGradient
        id="linearGradient23"
        inkscape:collect="always">
@@ -114,7 +137,7 @@
          id="stop84" />
     </linearGradient>
     <linearGradient
-       id="linearGradient46-1">
+       id="linearGradient46-2">
       <stop
          style="stop-color:#ef4d20;stop-opacity:1;"
          offset="0"
@@ -172,6 +195,24 @@
        x2="320.22028"
        y2="284.53842"
        gradientTransform="matrix(0.25546448,0,0,0.16747573,381.20219,449.86463)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient27"
+       id="linearGradient28"
+       x1="259.78329"
+       y1="781.28876"
+       x2="157.79372"
+       y2="1054.4298"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient46-1"
+       id="linearGradient30"
+       x1="723.68262"
+       y1="943.42834"
+       x2="239.24677"
+       y2="118.4197"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -180,37 +221,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.59268416"
-     inkscape:cx="619.21682"
-     inkscape:cy="674.0521"
+     inkscape:zoom="0.82252323"
+     inkscape:cx="519.74216"
+     inkscape:cy="547.09701"
      inkscape:document-units="px"
-     inkscape:current-layer="g11"
+     inkscape:current-layer="layer8"
      showgrid="true"
      inkscape:window-width="1760"
      inkscape:window-height="1127"
-     inkscape:window-x="983"
-     inkscape:window-y="117"
+     inkscape:window-x="1431"
+     inkscape:window-y="78"
      inkscape:window-maximized="0"
      inkscape:showpageshadow="2"
-     inkscape:pagecheckerboard="true"
-     inkscape:deskcolor="#d1d1d1">
-    <inkscape:grid
-       id="grid1"
-       units="px"
-       originx="0"
-       originy="0"
-       spacingx="16"
-       spacingy="16"
-       empcolor="#0099e5"
-       empopacity="0.30196078"
-       color="#0099e5"
-       opacity="0.14901961"
-       empspacing="4"
-       dotted="false"
-       gridanglex="30"
-       gridanglez="30"
-       visible="true" />
-  </sodipodi:namedview>
+     inkscape:pagecheckerboard="false"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata3035">
     <rdf:RDF>
@@ -562,6 +586,114 @@
            y="662.4848"
            rotate="0 0 0 0 0 0 0 0 0"
            id="tspan16">for OUYA</tspan></text>
+    </g>
+    <g
+       inkscape:groupmode="layer"
+       id="layer8"
+       inkscape:label="mac_icon"
+       style="display:none">
+      <g
+         id="use16"
+         transform="translate(1.5,29.862183)"
+         inkscape:label="template"
+         style="display:none">
+        <title
+           id="title15">App Icon Guides</title>
+        <g
+           id="g25">
+          <title
+             id="title17">App Icon Guides</title>
+          <path
+             style="fill:none;stroke:#919191;stroke-width:3px"
+             d="m 0,739.001 v -454 C 0,135.001 112,0 284.999,0 H 739.001 C 912,0 1024,135.001 1024,285.001 v 454 C 1024,889.001 912,1024 739.001,1024 H 284.999 C 112,1024 0,889.001 0,739.001 Z"
+             id="path18">
+            <title
+               id="title18">Outer Bounding Box</title>
+          </path>
+          <path
+             style="fill:none;stroke:#919191;stroke-width:3px"
+             d="m 50,739.001 v -454 C 50,162 140,50 284.999,50 H 739.001 C 884.001,50 974,162 974,285.001 v 454 C 974,862 884.001,974 739.001,974 H 284.999 C 140,974 50,862 50,739.001 Z"
+             id="path19">
+            <title
+               id="title19">Inner Bounding Box</title>
+          </path>
+          <path
+             style="display:inline;fill:none;stroke:#ff0000;stroke-width:3px"
+             d="m 100,724.005 v -424 C 100,185.006 170,100 300.026,100.005 L 724,100 c 130,0.005 200,85.006 200,200.005 v 424 c 0,115.001 -70,199.995 -200,200 H 300.026 C 170,924.005 100,839.006 100,724.005 Z"
+             id="path20">
+            <title
+               id="title20">Icon Grid Bounding Box</title>
+          </path>
+          <path
+             style="fill:none;stroke:#ff0000"
+             d="M 154.017,870.001 H 870.001 V 154.014 H 154.017 Z m 0,0 715.984,-715.987 z M 100,511.995 h 824 z m 0,157.365 H 924 Z M 924,354.631 H 100 Z M 669.365,99.995 v 824 z m -314.73,824 v -824 z M 512,99.995 v 824 z m -357.983,54.019 715.984,715.987 z"
+             id="path21">
+            <title
+               id="title21">Icon Grid</title>
+          </path>
+          <circle
+             style="fill:none"
+             cx="512"
+             cy="511.995"
+             r="157.397"
+             id="circle22">
+            <title
+               id="title22">Grid Circle 1</title>
+          </circle>
+          <circle
+             style="fill:none"
+             cx="512"
+             cy="511.995"
+             r="222.577"
+             id="circle23">
+            <title
+               id="title23">Grid Circle 2</title>
+          </circle>
+          <circle
+             style="fill:none"
+             cx="512"
+             cy="511.995"
+             r="358.00101"
+             id="circle24">
+            <title
+               id="title24">Grid Circle 3</title>
+          </circle>
+          <path
+             d="m 1084.343,548.001 h -941 c -28.719,0 -52,-23.281 -52,-52 0,-28.719 23.281,-52 52,-52 h 941 c 28.719,0 52,23.281 52,52 0,28.719 -23.281,52 -52,52 z m 51.957,-51.962 -1045,-0.078"
+             style="stroke:#0077ff;stroke-width:5px;stroke-dasharray:24, 10"
+             transform="rotate(-64.504252,613.82146,496.00118)"
+             id="path25">
+            <title
+               id="title25">Tool Angle</title>
+          </path>
+        </g>
+      </g>
+      <path
+         style="display:inline;fill:url(#linearGradient28);stroke:none;stroke-width:11.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 91.139387,766.70833 v -424 c 0,-114.999 70.000003,-200.005 200.026003,-200 l 423.974,-0.005 c 130,0.005 200,85.006 200,200.005 v 424 c 0,115.001 -70,199.995 -200,200 h -423.974 c -130.026,0 -200.026003,-84.999 -200.026003,-200 z"
+         id="path26"
+         inkscape:label="shadow">
+        <title
+           id="title26"
+           style="fill:url(#linearGradient28)">Icon Grid Bounding Box</title>
+      </path>
+      <path
+         style="display:inline;fill:url(#linearGradient30);fill-opacity:1;stroke:none;stroke-width:11.8;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 100,752.36468 v -424 c 0,-114.999 70,-200.005 200.026,-200 L 724,128.35968 c 130,0.005 200,85.006 200,200.005 v 424 c 0,115.001 -70,199.995 -200,200 H 300.026 c -130.026,0 -200.026,-84.999 -200.026,-200 z"
+         id="path27"
+         inkscape:label="back">
+        <title
+           id="title27"
+           style="fill:url(#linearGradient30)">Icon Grid Bounding Box</title>
+      </path>
+      <use
+         x="0"
+         y="0"
+         xlink:href="#g8"
+         id="use13"
+         style="display:inline"
+         transform="matrix(0.8351053,0,0,0.8351053,84.426086,89.10286)"
+         sodipodi:insensitive="true" />
     </g>
   </g>
 </svg>

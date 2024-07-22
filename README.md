@@ -238,10 +238,11 @@ open -a TextEdit.app ~/.bash_profile
 Be sure these variables and their paths are in the file. Replace /wherever/ with the path leading to your programs.
 
 ```
-export ANDROID_JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk—1.8.jdk/Contents/Home
+export ANDROID_JAVA_HOME=/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home
 export ANDROID_HOME=/wherever/.android/sdk
 export ANDROID_NDK_ROOT=/wherever/.android/sdk/ndk/17.2.4988734
 export ANDROID_NDK_HOME=/wherever/.android/sdk/ndk/17.2.4988734
+export BUILD_REVISION=OUYA
 ```
 
 Update environment variables in terminal:

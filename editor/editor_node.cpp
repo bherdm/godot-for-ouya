@@ -483,7 +483,7 @@ void EditorNode::_rebuild_import_menu() {
 	}
 }
 
-void EditorNode::_open_link(String &p_link) {
+void EditorNode::_open_link(const String &p_link) {
 
 	OS::get_singleton()->shell_open(p_link);
 }
