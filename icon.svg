@@ -6,8 +6,8 @@
    height="1024"
    id="svg3030"
    version="1.1"
-   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
-   sodipodi:docname="_icon.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="icon.svg"
    inkscape:export-filename="icon_64x64.png"
    inkscape:export-xdpi="6"
    inkscape:export-ydpi="6"
@@ -116,7 +116,7 @@
     <linearGradient
        id="linearGradient46-1">
       <stop
-         style="stop-color:#ef3620;stop-opacity:1;"
+         style="stop-color:#ef4d20;stop-opacity:1;"
          offset="0"
          id="stop45" />
       <stop
@@ -162,6 +162,16 @@
        x2="320.22028"
        y2="284.53842"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient46-1"
+       id="linearGradient11"
+       gradientUnits="userSpaceOnUse"
+       x1="600.41302"
+       y1="772.87433"
+       x2="320.22028"
+       y2="284.53842"
+       gradientTransform="matrix(0.25546448,0,0,0.16747573,381.20219,449.86463)" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -171,15 +181,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.59268416"
-     inkscape:cx="449.64927"
-     inkscape:cy="548.35277"
+     inkscape:cx="619.21682"
+     inkscape:cy="674.0521"
      inkscape:document-units="px"
-     inkscape:current-layer="layer9"
+     inkscape:current-layer="g11"
      showgrid="true"
      inkscape:window-width="1760"
      inkscape:window-height="1127"
-     inkscape:window-x="786"
-     inkscape:window-y="260"
+     inkscape:window-x="983"
+     inkscape:window-y="117"
      inkscape:window-maximized="0"
      inkscape:showpageshadow="2"
      inkscape:pagecheckerboard="true"
@@ -353,6 +363,49 @@
     </g>
     <g
        inkscape:groupmode="layer"
+       id="g11"
+       inkscape:label="about_logo"
+       style="display:none"
+       inkscape:export-filename="editor\icons\icon_ouya_logo.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
+      <rect
+         style="fill:url(#linearGradient11);fill-opacity:1;fill-rule:nonzero;stroke-width:10.2313;stroke-linecap:round;stroke-linejoin:round"
+         id="rect1"
+         width="187"
+         height="69"
+         x="418.5"
+         y="505.86218"
+         ry="0"
+         inkscape:label="background" />
+      <g
+         id="g9"
+         transform="matrix(0.28019544,0,0,0.28019544,367.41838,386.61827)">
+        <use
+           x="0"
+           y="0"
+           xlink:href="#rect10"
+           id="use5"
+           style="display:inline"
+           transform="matrix(2.8228725,0,0,2.8228725,-929.30798,-976.67113)" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#use11"
+           id="use8"
+           style="display:inline"
+           transform="matrix(2.8228725,0,0,2.8228725,-929.30798,-976.67113)" />
+        <use
+           x="0"
+           y="0"
+           xlink:href="#text12"
+           id="use9"
+           style="display:inline"
+           transform="matrix(2.8228725,0,0,2.8228725,-929.30798,-976.67113)" />
+      </g>
+    </g>
+    <g
+       inkscape:groupmode="layer"
        id="layer3"
        inkscape:label="editor-icons-source"
        transform="matrix(1.1159117,0,0,1.1159117,-59.346768,-72.017069)"
@@ -498,11 +551,11 @@
            x="408.6582"
            y="616.93121"
            id="tspan14"><tspan
-   dx="0 0 0 -0.0096403966"
-   dy="0 0 0 -0.11981636"
-   rotate="0 0 0 0 0 0 0 0 0"
-   id="tspan15"
-   style="font-weight:bold;font-size:50.6151px;line-height:0.9;text-align:start;letter-spacing:-1.51844px;word-spacing:-0.0790859px;text-anchor:start;fill:#414042;fill-opacity:1;stroke:none;stroke-width:78.2379">   Godot</tspan></tspan><tspan
+             dx="0 0 0 -0.0096403966"
+             dy="0 0 0 -0.11981636"
+             rotate="0 0 0 0 0 0 0 0 0"
+             id="tspan15"
+             style="font-weight:bold;font-size:50.6151px;line-height:0.9;text-align:start;letter-spacing:-1.51844px;word-spacing:-0.0790859px;text-anchor:start;fill:#414042;fill-opacity:1;stroke:none;stroke-width:78.2379">   Godot</tspan></tspan><tspan
            sodipodi:role="line"
            style="font-size:50.6151px;line-height:0.9;text-align:start;letter-spacing:-1.51844px;word-spacing:-0.0790859px;text-anchor:start;fill:#414042;fill-opacity:1;stroke:none;stroke-width:78.2379"
            x="408.6582"

@@ -483,6 +483,11 @@ void EditorNode::_rebuild_import_menu() {
 	}
 }
 
+void EditorNode::_open_link(String &p_link) {
+
+	OS::get_singleton()->shell_open(p_link);
+}
+
 void EditorNode::_node_renamed() {
 
 	if (property_editor)
@@ -5002,6 +5007,7 @@ void EditorNode::reload_scene(const String &p_path) {
 }
 
 void EditorNode::_bind_methods() {
+	ObjectTypeDB::bind_method("_open_link", &EditorNode::_open_link);
 
 	ObjectTypeDB::bind_method("_menu_option", &EditorNode::_menu_option);
 	ObjectTypeDB::bind_method("_menu_confirm_current", &EditorNode::_menu_confirm_current);
@@ -6089,16 +6095,35 @@ EditorNode::EditorNode() {
 	about->add_child(vbc);
 	vbc->add_child(hbc);
 	Label *about_text = memnew(Label);
-	about_text->set_text(VERSION_FULL_NAME + String::utf8("\n\u00A9 2007-2020 Juan Linietsky, Ariel Manzur.\n\u00A9 2014-2020 ") + TTR("Godot Engine contributors") + "\n");
+	about_text->set_text(VERSION_FULL_NAME);
 	TextureFrame *logo = memnew(TextureFrame);
-	logo->set_texture(gui_base->get_icon("Logo", "EditorIcons"));
+	logo->set_texture(gui_base->get_icon("OuyaLogo", "EditorIcons"));
 	hbc->add_child(logo);
 	hbc->add_child(about_text);
 	TabContainer *tc = memnew(TabContainer);
 	tc->set_custom_minimum_size(Vector2(740, 300));
 	vbc->add_child(tc);
+	ScrollContainer *g4o_tab = memnew(ScrollContainer);
+	g4o_tab->set_name(TTR("Godot-for-OUYA"));
+	tc->add_child(g4o_tab);
+	VBoxContainer *g4o_vbc = memnew(VBoxContainer);
+	g4o_tab->add_child(g4o_vbc);
+
+	LinkButton *ouya_export_help_button = memnew(LinkButton);
+	g4o_vbc->add_child(ouya_export_help_button);
+	ouya_export_help_button->set_text("OUYA Export Setup Guide");
+	ouya_export_help_button->set_disabled(false);
+	ouya_export_help_button->connect("pressed", this, "_open_link",make_binds("https://github.com/bherdm/godot-for-ouya?tab=readme-ov-file#engine-setup"));
+	
+	LinkButton *ouya_world_button = memnew(LinkButton);
+	g4o_vbc->add_child(ouya_world_button);
+	ouya_world_button->set_text("OUYA World Forums");
+	ouya_world_button->set_disabled(false);
+	ouya_world_button->connect("pressed", this, "_open_link",make_binds("https://ouya.world/"));
+	
+	
 	ScrollContainer *dev_base = memnew(ScrollContainer);
-	dev_base->set_name(TTR("Developers"));
+	dev_base->set_name(TTR("Godot Devs"));
 	tc->add_child(dev_base);
 	HBoxContainer *dev_hbc = memnew(HBoxContainer);
 	dev_hbc->set_h_size_flags(Control::SIZE_EXPAND_FILL);

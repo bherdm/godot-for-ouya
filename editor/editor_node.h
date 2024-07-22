@@ -450,6 +450,8 @@ private:
 
 	void _rebuild_import_menu();
 
+	void _open_link(String &p_link);
+
 	void _save_scene(String p_file, int idx = -1);
 
 	void _instance_request(const Vector<String> &p_files);
