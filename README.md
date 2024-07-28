@@ -317,8 +317,7 @@ you have cores in your CPU, if not one or two more, I use -j9
 #### Windows Editor
 
 ```
-scons platform=windows bits=64
-scons platform=windows bits=32
+scons platform=windows
 ```
 
 #### Mac OS Editor
