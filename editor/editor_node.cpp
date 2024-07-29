@@ -4416,11 +4416,11 @@ void EditorNode::_update_dock_slots_visibility() {
 
 void EditorNode::_update_top_menu_visibility() {
 	if (distraction_free_mode) {
-		play_cc->hide();
+		//play_cc->hide();
 		menu_hb->hide();
 		scene_tabs->hide();
 	} else {
-		play_cc->show();
+		//play_cc->show();
 		menu_hb->show();
 		scene_tabs->show();
 	}
@@ -5254,8 +5254,10 @@ EditorNode::EditorNode() {
 	left_l_vsplit = memnew(VSplitContainer);
 	left_l_hsplit->add_child(left_l_vsplit);
 	dock_slot[DOCK_SLOT_LEFT_UL] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_LEFT_UL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_l_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_UL]);
 	dock_slot[DOCK_SLOT_LEFT_BL] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_LEFT_BL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_l_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_BL]);
 	left_l_vsplit->hide();
 	dock_slot[DOCK_SLOT_LEFT_UL]->hide();
@@ -5266,8 +5268,10 @@ EditorNode::EditorNode() {
 	left_r_vsplit = memnew(VSplitContainer);
 	left_r_hsplit->add_child(left_r_vsplit);
 	dock_slot[DOCK_SLOT_LEFT_UR] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_LEFT_UR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_r_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_UR]);
 	dock_slot[DOCK_SLOT_LEFT_BR] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_LEFT_BR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_r_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_BR]);
 	//left_r_vsplit->hide();
 	//dock_slot[DOCK_SLOT_LEFT_UR]->hide();
@@ -5292,8 +5296,10 @@ EditorNode::EditorNode() {
 	right_l_vsplit = memnew(VSplitContainer);
 	right_hsplit->add_child(right_l_vsplit);
 	dock_slot[DOCK_SLOT_RIGHT_UL] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_RIGHT_UL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_l_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_UL]);
 	dock_slot[DOCK_SLOT_RIGHT_BL] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_RIGHT_BL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_l_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_BL]);
 	//right_l_vsplit->hide();
 	//dock_slot[DOCK_SLOT_RIGHT_UL]->hide();
@@ -5302,8 +5308,10 @@ EditorNode::EditorNode() {
 	right_r_vsplit = memnew(VSplitContainer);
 	right_hsplit->add_child(right_r_vsplit);
 	dock_slot[DOCK_SLOT_RIGHT_UR] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_RIGHT_UR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_r_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_UR]);
 	dock_slot[DOCK_SLOT_RIGHT_BR] = memnew(TabContainer);
+	dock_slot[DOCK_SLOT_RIGHT_BR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_r_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_BR]);
 	right_r_vsplit->hide();
 	dock_slot[DOCK_SLOT_RIGHT_UR]->hide();
@@ -5509,8 +5517,10 @@ EditorNode::EditorNode() {
 	{
 		Control *sp = memnew(Control);
 		sp->set_custom_minimum_size(Size2(30, 0) * EDSCALE);
-		menu_hb->add_child(sp);
+		//menu_hb->add_child(sp);
 	}
+
+	menu_hb->add_spacer();
 
 	PanelContainer *editor_region = memnew(PanelContainer);
 	editor_region->add_style_override("panel", gui_base->get_stylebox("hover", "Button"));
@@ -5581,7 +5591,7 @@ EditorNode::EditorNode() {
 	//menu_panel->add_child(s1);
 	//s1->set_pos(Point2(210,4));
 	//s1->set_size(Point2(10,15));
-
+/*
 	play_cc = memnew(CenterContainer);
 	play_cc->set_ignore_mouse(true);
 	gui_base->add_child(play_cc);
@@ -5593,95 +5603,7 @@ EditorNode::EditorNode() {
 	top_region->add_style_override("panel", gui_base->get_stylebox("hover", "Button"));
 	play_cc->add_child(top_region);
 
-	HBoxContainer *play_hb = memnew(HBoxContainer);
-	top_region->add_child(play_hb);
-
-	play_button = memnew(ToolButton);
-	play_hb->add_child(play_button);
-	play_button->set_toggle_mode(true);
-	play_button->set_icon(gui_base->get_icon("MainPlay", "EditorIcons"));
-	play_button->set_focus_mode(Control::FOCUS_NONE);
-	play_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY));
-	play_button->set_tooltip(TTR("Play the project."));
-	play_button->set_shortcut(ED_SHORTCUT("editor/play", TTR("Play"), KEY_F5));
-
-	pause_button = memnew(ToolButton);
-	//menu_panel->add_child(pause_button); - not needed for now?
-	pause_button->set_toggle_mode(true);
-	pause_button->set_icon(gui_base->get_icon("Pause", "EditorIcons"));
-	pause_button->set_focus_mode(Control::FOCUS_NONE);
-	//pause_button->connect("pressed", this,"_menu_option",make_binds(RUN_PAUSE));
-	pause_button->set_tooltip(TTR("Pause the scene"));
-	pause_button->set_disabled(true);
-	play_hb->add_child(pause_button);
-	pause_button->set_shortcut(ED_SHORTCUT("editor/pause_scene", TTR("Pause Scene"), KEY_F7));
-
-	stop_button = memnew(ToolButton);
-	play_hb->add_child(stop_button);
-	//stop_button->set_toggle_mode(true);
-	stop_button->set_focus_mode(Control::FOCUS_NONE);
-	stop_button->set_icon(gui_base->get_icon("MainStop", "EditorIcons"));
-	stop_button->connect("pressed", this, "_menu_option", make_binds(RUN_STOP));
-	stop_button->set_tooltip(TTR("Stop the scene."));
-	stop_button->set_disabled(true);
-	stop_button->set_shortcut(ED_SHORTCUT("editor/stop", TTR("Stop"), KEY_F8));
-
-	run_native = memnew(EditorRunNative);
-	play_hb->add_child(run_native);
-	native_play_button = memnew(MenuButton);
-	native_play_button->set_text("NTV");
-	menu_hb->add_child(native_play_button);
-	native_play_button->hide();
-	native_play_button->get_popup()->connect("item_pressed", this, "_run_in_device");
-	run_native->connect("native_run", this, "_menu_option", varray(RUN_PLAY_NATIVE));
-
-	//	VSeparator *s1 = memnew( VSeparator );
-	//	play_hb->add_child(s1);
-
-	play_scene_button = memnew(ToolButton);
-	play_hb->add_child(play_scene_button);
-	play_scene_button->set_toggle_mode(true);
-	play_scene_button->set_focus_mode(Control::FOCUS_NONE);
-	play_scene_button->set_icon(gui_base->get_icon("PlayScene", "EditorIcons"));
-	play_scene_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY_SCENE));
-	play_scene_button->set_tooltip(TTR("Play the edited scene."));
-	play_scene_button->set_shortcut(ED_SHORTCUT("editor/play_scene", TTR("Play Scene"), KEY_F6));
-
-	play_custom_scene_button = memnew(ToolButton);
-	play_hb->add_child(play_custom_scene_button);
-	play_custom_scene_button->set_toggle_mode(true);
-	play_custom_scene_button->set_focus_mode(Control::FOCUS_NONE);
-	play_custom_scene_button->set_icon(gui_base->get_icon("PlayCustom", "EditorIcons"));
-	play_custom_scene_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY_CUSTOM_SCENE));
-	play_custom_scene_button->set_tooltip(TTR("Play custom scene"));
-	play_custom_scene_button->set_shortcut(ED_SHORTCUT("editor/play_custom_scene", TTR("Play Custom Scene"), KEY_MASK_CMD | KEY_MASK_SHIFT | KEY_F5));
-
-	debug_button = memnew(MenuButton);
-	debug_button->set_flat(true);
-	play_hb->add_child(debug_button);
-	//debug_button->set_toggle_mode(true);
-	debug_button->set_focus_mode(Control::FOCUS_NONE);
-	debug_button->set_icon(gui_base->get_icon("Remote", "EditorIcons"));
-	//debug_button->connect("pressed", this,"_menu_option",make_binds(RUN_LIVE_DEBUG));
-	debug_button->set_tooltip(TTR("Debug options"));
-
-	p = debug_button->get_popup();
-	p->set_hide_on_item_selection(false);
-	p->add_check_item(TTR("Deploy with Remote Debug"), RUN_DEPLOY_REMOTE_DEBUG);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("When exporting or deploying, the resulting executable will attempt to connect to the IP of this computer in order to be debugged."));
-	p->add_check_item(TTR("Small Deploy with Network FS"), RUN_FILE_SERVER);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is enabled, export or deploy will produce a minimal executable.\nThe filesystem will be provided from the project by the editor over the network.\nOn Android, deploy will use the USB cable for faster performance. This option speeds up testing for games with a large footprint."));
-	p->add_separator();
-	p->add_check_item(TTR("Visible Collision Shapes"), RUN_DEBUG_COLLISONS);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("Collision shapes and raycast nodes (for 2D and 3D) will be visible on the running game if this option is turned on."));
-	p->add_check_item(TTR("Visible Navigation"), RUN_DEBUG_NAVIGATION);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("Navigation meshes and polygons will be visible on the running game if this option is turned on."));
-	p->add_separator();
-	p->add_check_item(TTR("Sync Scene Changes"), RUN_LIVE_DEBUG);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is turned on, any changes made to the scene in the editor will be replicated in the running game.\nWhen used remotely on a device, this is more efficient with network filesystem."));
-	p->add_check_item(TTR("Sync Script Changes"), RUN_RELOAD_SCRIPTS);
-	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is turned on, any script that is saved will be reloaded on the running game.\nWhen used remotely on a device, this is more efficient with network filesystem."));
-	p->connect("item_pressed", this, "_menu_option");
+	*/
 
 	/*
 	run_settings_button = memnew( ToolButton );
@@ -5738,9 +5660,9 @@ EditorNode::EditorNode() {
 	menu_hb->add_child(top_region);
 
 	settings_menu = memnew(MenuButton);
-	settings_menu->set_text(TTR("Settings"));
+	settings_menu->set_text(TTR("Editor"));
 	//settings_menu->set_anchor(MARGIN_RIGHT,ANCHOR_END);
-	right_menu_hb->add_child(settings_menu);
+	left_menu_hb->add_child(settings_menu);
 	p = settings_menu->get_popup();
 
 	//p->add_item("Export Settings",SETTINGS_EXPORT_PREFERENCES);
@@ -5762,6 +5684,96 @@ EditorNode::EditorNode() {
 	layout_dialog->set_hide_on_ok(false);
 	layout_dialog->set_size(Size2(175, 70) * EDSCALE);
 	layout_dialog->connect("name_confirmed", this, "_dialog_action");
+
+	//HBoxContainer *play_hb = memnew(HBoxContainer);
+	//top_region->add_child(play_hb);
+
+	play_button = memnew(ToolButton);
+	right_menu_hb->add_child(play_button);
+	play_button->set_toggle_mode(true);
+	play_button->set_icon(gui_base->get_icon("MainPlay", "EditorIcons"));
+	play_button->set_focus_mode(Control::FOCUS_NONE);
+	play_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY));
+	play_button->set_tooltip(TTR("Play the project."));
+	play_button->set_shortcut(ED_SHORTCUT("editor/play", TTR("Play"), KEY_F5));
+
+	pause_button = memnew(ToolButton);
+	//menu_panel->add_child(pause_button); - not needed for now?
+	pause_button->set_toggle_mode(true);
+	pause_button->set_icon(gui_base->get_icon("Pause", "EditorIcons"));
+	pause_button->set_focus_mode(Control::FOCUS_NONE);
+	//pause_button->connect("pressed", this,"_menu_option",make_binds(RUN_PAUSE));
+	pause_button->set_tooltip(TTR("Pause the scene"));
+	pause_button->set_disabled(true);
+	right_menu_hb->add_child(pause_button);
+	pause_button->set_shortcut(ED_SHORTCUT("editor/pause_scene", TTR("Pause Scene"), KEY_F7));
+
+	stop_button = memnew(ToolButton);
+	right_menu_hb->add_child(stop_button);
+	//stop_button->set_toggle_mode(true);
+	stop_button->set_focus_mode(Control::FOCUS_NONE);
+	stop_button->set_icon(gui_base->get_icon("MainStop", "EditorIcons"));
+	stop_button->connect("pressed", this, "_menu_option", make_binds(RUN_STOP));
+	stop_button->set_tooltip(TTR("Stop the scene."));
+	stop_button->set_disabled(true);
+	stop_button->set_shortcut(ED_SHORTCUT("editor/stop", TTR("Stop"), KEY_F8));
+
+	run_native = memnew(EditorRunNative);
+	right_menu_hb->add_child(run_native);
+	native_play_button = memnew(MenuButton);
+	native_play_button->set_text("NTV");
+	menu_hb->add_child(native_play_button);
+	native_play_button->hide();
+	native_play_button->get_popup()->connect("item_pressed", this, "_run_in_device");
+	run_native->connect("native_run", this, "_menu_option", varray(RUN_PLAY_NATIVE));
+
+	//	VSeparator *s1 = memnew( VSeparator );
+	//	play_hb->add_child(s1);
+
+	play_scene_button = memnew(ToolButton);
+	right_menu_hb->add_child(play_scene_button);
+	play_scene_button->set_toggle_mode(true);
+	play_scene_button->set_focus_mode(Control::FOCUS_NONE);
+	play_scene_button->set_icon(gui_base->get_icon("PlayScene", "EditorIcons"));
+	play_scene_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY_SCENE));
+	play_scene_button->set_tooltip(TTR("Play the edited scene."));
+	play_scene_button->set_shortcut(ED_SHORTCUT("editor/play_scene", TTR("Play Scene"), KEY_F6));
+
+	play_custom_scene_button = memnew(ToolButton);
+	right_menu_hb->add_child(play_custom_scene_button);
+	play_custom_scene_button->set_toggle_mode(true);
+	play_custom_scene_button->set_focus_mode(Control::FOCUS_NONE);
+	play_custom_scene_button->set_icon(gui_base->get_icon("PlayCustom", "EditorIcons"));
+	play_custom_scene_button->connect("pressed", this, "_menu_option", make_binds(RUN_PLAY_CUSTOM_SCENE));
+	play_custom_scene_button->set_tooltip(TTR("Play custom scene"));
+	play_custom_scene_button->set_shortcut(ED_SHORTCUT("editor/play_custom_scene", TTR("Play Custom Scene"), KEY_MASK_CMD | KEY_MASK_SHIFT | KEY_F5));
+
+	debug_button = memnew(MenuButton);
+	debug_button->set_flat(true);
+	right_menu_hb->add_child(debug_button);
+	//debug_button->set_toggle_mode(true);
+	debug_button->set_focus_mode(Control::FOCUS_NONE);
+	debug_button->set_icon(gui_base->get_icon("Remote", "EditorIcons"));
+	//debug_button->connect("pressed", this,"_menu_option",make_binds(RUN_LIVE_DEBUG));
+	debug_button->set_tooltip(TTR("Debug options"));
+
+	p = debug_button->get_popup();
+	p->set_hide_on_item_selection(false);
+	p->add_check_item(TTR("Deploy with Remote Debug"), RUN_DEPLOY_REMOTE_DEBUG);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("When exporting or deploying, the resulting executable will attempt to connect to the IP of this computer in order to be debugged."));
+	p->add_check_item(TTR("Small Deploy with Network FS"), RUN_FILE_SERVER);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is enabled, export or deploy will produce a minimal executable.\nThe filesystem will be provided from the project by the editor over the network.\nOn Android, deploy will use the USB cable for faster performance. This option speeds up testing for games with a large footprint."));
+	p->add_separator();
+	p->add_check_item(TTR("Visible Collision Shapes"), RUN_DEBUG_COLLISONS);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("Collision shapes and raycast nodes (for 2D and 3D) will be visible on the running game if this option is turned on."));
+	p->add_check_item(TTR("Visible Navigation"), RUN_DEBUG_NAVIGATION);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("Navigation meshes and polygons will be visible on the running game if this option is turned on."));
+	p->add_separator();
+	p->add_check_item(TTR("Sync Scene Changes"), RUN_LIVE_DEBUG);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is turned on, any changes made to the scene in the editor will be replicated in the running game.\nWhen used remotely on a device, this is more efficient with network filesystem."));
+	p->add_check_item(TTR("Sync Script Changes"), RUN_RELOAD_SCRIPTS);
+	p->set_item_tooltip(p->get_item_count() - 1, TTR("When this option is turned on, any script that is saved will be reloaded on the running game.\nWhen used remotely on a device, this is more efficient with network filesystem."));
+	p->connect("item_pressed", this, "_menu_option");
 
 	sources_button = memnew(ToolButton);
 	right_menu_hb->add_child(sources_button);
@@ -6101,10 +6113,11 @@ EditorNode::EditorNode() {
 	hbc->add_child(logo);
 	hbc->add_child(about_text);
 	TabContainer *tc = memnew(TabContainer);
+	tc->set_tab_align(TabContainer::ALIGN_LEFT);
 	tc->set_custom_minimum_size(Vector2(740, 300));
 	vbc->add_child(tc);
 	ScrollContainer *g4o_tab = memnew(ScrollContainer);
-	g4o_tab->set_name(TTR("Godot-for-OUYA"));
+	g4o_tab->set_name(TTR("Godot for OUYA"));
 	tc->add_child(g4o_tab);
 	VBoxContainer *g4o_vbc = memnew(VBoxContainer);
 	g4o_tab->add_child(g4o_vbc);
