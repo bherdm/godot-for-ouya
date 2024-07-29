@@ -5254,10 +5254,8 @@ EditorNode::EditorNode() {
 	left_l_vsplit = memnew(VSplitContainer);
 	left_l_hsplit->add_child(left_l_vsplit);
 	dock_slot[DOCK_SLOT_LEFT_UL] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_LEFT_UL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_l_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_UL]);
 	dock_slot[DOCK_SLOT_LEFT_BL] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_LEFT_BL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_l_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_BL]);
 	left_l_vsplit->hide();
 	dock_slot[DOCK_SLOT_LEFT_UL]->hide();
@@ -5268,10 +5266,8 @@ EditorNode::EditorNode() {
 	left_r_vsplit = memnew(VSplitContainer);
 	left_r_hsplit->add_child(left_r_vsplit);
 	dock_slot[DOCK_SLOT_LEFT_UR] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_LEFT_UR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_r_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_UR]);
 	dock_slot[DOCK_SLOT_LEFT_BR] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_LEFT_BR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	left_r_vsplit->add_child(dock_slot[DOCK_SLOT_LEFT_BR]);
 	//left_r_vsplit->hide();
 	//dock_slot[DOCK_SLOT_LEFT_UR]->hide();
@@ -5296,10 +5292,8 @@ EditorNode::EditorNode() {
 	right_l_vsplit = memnew(VSplitContainer);
 	right_hsplit->add_child(right_l_vsplit);
 	dock_slot[DOCK_SLOT_RIGHT_UL] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_RIGHT_UL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_l_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_UL]);
 	dock_slot[DOCK_SLOT_RIGHT_BL] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_RIGHT_BL]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_l_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_BL]);
 	//right_l_vsplit->hide();
 	//dock_slot[DOCK_SLOT_RIGHT_UL]->hide();
@@ -5308,10 +5302,8 @@ EditorNode::EditorNode() {
 	right_r_vsplit = memnew(VSplitContainer);
 	right_hsplit->add_child(right_r_vsplit);
 	dock_slot[DOCK_SLOT_RIGHT_UR] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_RIGHT_UR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_r_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_UR]);
 	dock_slot[DOCK_SLOT_RIGHT_BR] = memnew(TabContainer);
-	dock_slot[DOCK_SLOT_RIGHT_BR]->set_tab_align(TabContainer::ALIGN_LEFT);
 	right_r_vsplit->add_child(dock_slot[DOCK_SLOT_RIGHT_BR]);
 	right_r_vsplit->hide();
 	dock_slot[DOCK_SLOT_RIGHT_UR]->hide();
@@ -5394,7 +5386,7 @@ EditorNode::EditorNode() {
 */
 	scene_tabs = memnew(Tabs);
 	scene_tabs->add_tab("unsaved");
-	scene_tabs->set_tab_align(Tabs::ALIGN_CENTER);
+	scene_tabs->set_tab_align(Tabs::ALIGN_LEFT);
 	scene_tabs->set_tab_close_display_policy((bool(EDITOR_DEF("global/always_show_close_button_in_scene_tabs", false)) ? Tabs::CLOSE_BUTTON_SHOW_ALWAYS : Tabs::CLOSE_BUTTON_SHOW_ACTIVE_ONLY));
 	scene_tabs->connect("tab_changed", this, "_scene_tab_changed");
 	scene_tabs->connect("right_button_pressed", this, "_scene_tab_script_edited");
@@ -5629,7 +5621,7 @@ EditorNode::EditorNode() {
 	{
 		Control *sp = memnew(Control);
 		sp->set_custom_minimum_size(Size2(30, 0) * EDSCALE);
-		menu_hb->add_child(sp);
+		//menu_hb->add_child(sp);
 	}
 
 	PanelContainer *vu_cont = memnew(PanelContainer);
@@ -6113,7 +6105,6 @@ EditorNode::EditorNode() {
 	hbc->add_child(logo);
 	hbc->add_child(about_text);
 	TabContainer *tc = memnew(TabContainer);
-	tc->set_tab_align(TabContainer::ALIGN_LEFT);
 	tc->set_custom_minimum_size(Vector2(740, 300));
 	vbc->add_child(tc);
 	ScrollContainer *g4o_tab = memnew(ScrollContainer);

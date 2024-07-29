@@ -719,7 +719,7 @@ TabContainer::TabContainer() {
 	current = 0;
 	previous = 0;
 	mouse_x_cache = 0;
-	align = ALIGN_CENTER;
+	align = ALIGN_LEFT;
 	tabs_visible = true;
 	popup = NULL;
 }

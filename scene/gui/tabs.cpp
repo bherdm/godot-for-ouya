@@ -649,7 +649,7 @@ void Tabs::_bind_methods() {
 Tabs::Tabs() {
 
 	current = 0;
-	tab_align = ALIGN_CENTER;
+	tab_align = ALIGN_LEFT;
 	rb_hover = -1;
 	rb_pressing = false;
 	hilite_arrow = -1;

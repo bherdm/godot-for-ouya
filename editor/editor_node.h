@@ -330,7 +330,7 @@ private:
 	MenuButton *editor_history_menu;
 
 	EditorLog *log;
-	CenterContainer *tabs_center;
+	//CenterContainer *tabs_center;
 	EditorQuickOpen *quick_open;
 	EditorQuickOpen *quick_run;
 
