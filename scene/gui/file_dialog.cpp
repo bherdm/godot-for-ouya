@@ -48,6 +48,7 @@ void FileDialog::_notification(int p_what) {
 	if (p_what == NOTIFICATION_ENTER_TREE) {
 
 		refresh->set_icon(get_icon("reload"));
+		dir_up->set_icon(get_icon("ArrowUp", "EditorIcons"));
 	}
 
 	if (p_what == NOTIFICATION_DRAW) {
@@ -268,6 +269,13 @@ void FileDialog::_cancel_pressed() {
 	file->set_text("");
 	invalidate();
 	hide();
+}
+
+void FileDialog::_go_up() {
+
+	dir_access->change_dir("..");
+	update_file_list();
+	update_dir();
 }
 
 void FileDialog::_tree_selected() {
@@ -711,6 +719,7 @@ void FileDialog::_bind_methods() {
 	ObjectTypeDB::bind_method(_MD("_make_dir_confirm"), &FileDialog::_make_dir_confirm);
 	ObjectTypeDB::bind_method(_MD("_update_file_list"), &FileDialog::update_file_list);
 	ObjectTypeDB::bind_method(_MD("_update_dir"), &FileDialog::update_dir);
+	ObjectTypeDB::bind_method(_MD("_go_up"), &FileDialog::_go_up);
 
 	ObjectTypeDB::bind_method(_MD("invalidate"), &FileDialog::invalidate);
 
@@ -759,8 +768,14 @@ FileDialog::FileDialog() {
 	mode = MODE_SAVE_FILE;
 	set_title(RTR("Save a File"));
 
-	dir = memnew(LineEdit);
 	HBoxContainer *pathhb = memnew(HBoxContainer);
+
+	dir_up = memnew(ToolButton);
+	dir_up->set_tooltip(TTR("Go to parent folder"));
+	pathhb->add_child(dir_up);
+	dir_up->connect("pressed", this, "_go_up");
+
+	dir = memnew(LineEdit);
 	pathhb->add_child(dir);
 	dir->set_h_size_flags(SIZE_EXPAND_FILL);
 

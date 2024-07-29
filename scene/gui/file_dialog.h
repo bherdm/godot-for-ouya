@@ -87,6 +87,8 @@ private:
 	DirAccess *dir_access;
 	ConfirmationDialog *confirm_save;
 
+	ToolButton *dir_up;
+
 	ToolButton *refresh;
 
 	Vector<String> filters;
@@ -112,6 +114,7 @@ private:
 	void _filter_selected(int);
 	void _make_dir();
 	void _make_dir_confirm();
+	void _go_up();
 
 	void _update_drives();
 
