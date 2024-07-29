@@ -5800,7 +5800,7 @@ EditorNode::EditorNode() {
 	scene_tree_dock = memnew(SceneTreeDock(this, scene_root, editor_selection, editor_data));
 	scene_tree_dock->set_name(TTR("Scene"));
 	//top_pallete->add_child(scene_tree_dock);
-	dock_slot[DOCK_SLOT_RIGHT_UL]->add_child(scene_tree_dock);
+	dock_slot[DOCK_SLOT_LEFT_UR]->add_child(scene_tree_dock);
 #if 0
 	resources_dock = memnew( ResourcesDock(this) );
 	resources_dock->set_name("Resources");
@@ -5808,7 +5808,7 @@ EditorNode::EditorNode() {
 	dock_slot[DOCK_SLOT_RIGHT_BL]->add_child(resources_dock);
 	//top_pallete->set_v_size_flags(Control::SIZE_EXPAND_FILL);
 #endif
-	dock_slot[DOCK_SLOT_LEFT_BR]->hide();
+	dock_slot[DOCK_SLOT_RIGHT_UL]->hide();
 	/*Control *editor_spacer = memnew( Control );
 	editor_spacer->set_custom_minimum_size(Size2(260,200));
 	editor_spacer->set_v_size_flags(Control::SIZE_EXPAND_FILL);
@@ -5959,7 +5959,7 @@ EditorNode::EditorNode() {
 		dock_slot[DOCK_SLOT_LEFT_UR]->hide();
 		dock_slot[DOCK_SLOT_LEFT_BR]->hide();
 	} else {
-		dock_slot[DOCK_SLOT_LEFT_UR]->add_child(filesystem_dock);
+		dock_slot[DOCK_SLOT_LEFT_BR]->add_child(filesystem_dock);
 	}
 
 	//prop_pallete->add_child(filesystem_dock);
