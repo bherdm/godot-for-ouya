@@ -327,9 +327,11 @@ void PopupMenu::_gui_input(const Ref<InputEvent> &p_event) {
 	}
 
 	// Make an area which does not include v scrollbar, so that items are not activated when dragging scrollbar.
-	Rect2 item_clickable_area = control->get_global_rect();
+	Transform2D xform = get_global_transform_with_canvas();
+	Point2 item_origin = xform.get_origin();
 	float scroll_width = scroll_container->get_v_scrollbar()->is_visible_in_tree() ? scroll_container->get_v_scrollbar()->get_size().width : 0;
-	item_clickable_area.set_size(Size2(item_clickable_area.size.width - scroll_width, item_clickable_area.size.height));
+	Size2 item_size = (control->get_global_rect().get_size() - Vector2(scroll_width, 0)) * xform.get_scale();
+	Rect2 item_clickable_area = Rect2(item_origin, item_size);
 
 	Ref<InputEventMouseButton> b = p_event;
 
@@ -644,6 +646,8 @@ void PopupMenu::_notification(int p_what) {
 		case NOTIFICATION_POST_POPUP: {
 			initial_button_mask = Input::get_singleton()->get_mouse_button_mask();
 			during_grabbed_click = (bool)initial_button_mask;
+		} break;
+		case NOTIFICATION_VISIBILITY_CHANGED: {
 			// Set margin on the margin container
 			Ref<StyleBox> panel_style = get_stylebox("panel");
 			margin_container->add_constant_override("margin_top", panel_style->get_margin(Margin::MARGIN_TOP));
