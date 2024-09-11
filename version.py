@@ -2,5 +2,5 @@ short_name = "godot"
 name = "Godot for OUYA"
 major = 2
 minor = 1
-patch = 7
+patch = 8
 status = "alpha"
