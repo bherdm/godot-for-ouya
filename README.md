@@ -61,6 +61,11 @@ On Mac, precede this command with ```sudo```.
 
 ```keytool -keyalg RSA -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -validity 9999```
 
+### Create a release.keystore
+
+```keytool -genkeypair -alias mygame -keyalg RSA -keysize 2048 -sigalg SHA1withRSA -keystore mygame.keystore -validity 10000```
+
+
 ### Engine Configuration for OUYA Export
 
 Open Godot-for-OUYA. In Editor Settings, set these 3 file paths:
