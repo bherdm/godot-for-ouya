@@ -11,7 +11,7 @@ OpenJDK 8<br>
 Android SDK Command Line Tools v8.0<br>[Windows](https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zi") - [Mac](https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip")
 
 Godot-for-OUYA Engine + Android Template APKs<br>
-https://github.com/bherdm/godot-for-ouya/releases/tag/ouya-2.1.7-rc-ville2304
+https://github.com/bherdm/godot-for-ouya/releases/tag/ouya-2.1.8
 
 Official Godot Engine 2.1.6-stable Export Templates<br>
 https://github.com/godotengine/godot/releases/tag/2.1.6-stable
@@ -39,7 +39,9 @@ Use Powershell or Terminal to install the necessary Android SDK components.
 
 ```
 cd /wherever/Android/sdk/cmdline-tools/latest/bin
+```
 
+```
 ./sdkmanager "platforms;android-23" "platform-tools" "build-tools;26.0.1" "ndk;17.2.4988734" "sources;android-23"
 ```
 
@@ -56,6 +58,11 @@ Android needs a debug keystore file to install to devices and distribute non-rel
 If you can’t find it or need to generate one, the keytool command from the JDK can be used for this purpose.
 
 On Windows, use Powershell, opened as administrator.
+
+Navigate to your Java folder.
+
+On Mac:
+```cd /Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/bin```
 
 On Mac, precede this command with ```sudo```.
 
