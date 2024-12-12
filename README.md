@@ -35,10 +35,10 @@ Extract the command line tools with this folder structure:
 /wherever/Android/sdk/cmdline-tools/latest/source.properties
 ```
 
-Use Powershell to install the necessary Android SDK components.
+Use Powershell or Terminal to install the necessary Android SDK components.
 
 ```
-cd /wherever/Android/sdk/cmdline-tools/bin
+cd /wherever/Android/sdk/cmdline-tools/latest/bin
 
 ./sdkmanager "platforms;android-23" "platform-tools" "build-tools;26.0.1" "ndk;17.2.4988734" "sources;android-23"
 ```
