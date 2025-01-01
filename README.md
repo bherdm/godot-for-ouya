@@ -1,6 +1,6 @@
 # Godot-for-OUYA
 
-## Engine Setup
+## Prerequisites
 
 <details> 
   <summary>All Downloads</summary>
@@ -73,7 +73,7 @@ On Mac, precede this command with ```sudo```.
 ```keytool -genkeypair -alias mygame -keyalg RSA -keysize 2048 -sigalg SHA1withRSA -keystore mygame.keystore -validity 10000```
 
 
-### Engine Configuration for OUYA Export
+## Engine Configuration
 
 Open Godot-for-OUYA. In Editor Settings, set these 3 file paths:
 
@@ -84,19 +84,23 @@ Open Godot-for-OUYA. In Editor Settings, set these 3 file paths:
     * Mac OS: ```/Library/Java/JavaVirtualMachines/temurin-8.jdk/Contents/Home/bin```
 * Your debug _keystore_.
 
-Import the stable export templates.
+#### Export Templates
+
+The export templates must be installed to be able to export projects. They can be obtained as a .tpz (a renamed .zip) file from the download page of the GitHub release page: <https://github.com/bherdm/godot-for-ouya/releases>.
+
+Once downloaded, they can be installed using the “Install Export Templates” option under the “Settings” menu in the top right corner of the editor.
 
 #### Project Export Settings
-
-Set the Android export custom debug/release packages to the extracted APKs from the [releases page](https://github.com/bherdm/godot-for-ouya/releases).
 
 Set a unique package name with syntax: com.companyname.productname
 
 Set the OUYA icon. The OUYA icon should be a 732x412 PNG imported into the project assets.
 
-## Compiling the Engine
+# Compiling from Source
 
 Follow this guide to compile the engine and export templates from source.
+
+## Prerequisites
 
 <details> 
   <summary>All Downloads</summary>
@@ -263,7 +267,7 @@ Update environment variables in terminal:
 source ~/.bash_profile
 ```
 
-## Compiling
+## Compiling the Engine
 
 <details> 
   <summary>Notes about Windows and Visual Studio</summary>
@@ -332,7 +336,7 @@ you have cores in your CPU, if not one or two more, I use -j9
 scons platform=windows
 ```
 
-#### Mac OS Editor
+#### mac OS Editor
 
 ```
 scons platform=osx target=release_debug bits=64
@@ -341,31 +345,75 @@ cp -r misc/dist/osx_tools.app ./godot-for-ouya.app
 mkdir -p godot-for-ouya.app/Contents/MacOS
 cp bin/godot.osx.opt.tools.64 godot-for-ouya.app/Contents/MacOS/Godot
 chmod +x godot-for-ouya.app/Contents/MacOS/Godot
-
-scons platform=osx target=release_debug bits=32
-
-cp -r misc/dist/osx_tools.app ./godot-for-ouya.app
-mkdir -p godot-for-ouya.app/Contents/MacOS
-cp bin/godot.osx.opt.tools.32 godot-for-ouya.app/Contents/MacOS/Godot
-chmod +x godot-for-ouya.app/Contents/MacOS/Godot
 ```
 
-#### Android Templates
+## Compiling Templates
+
+### OUYA Templates
 
 ```
 scons platform=android target=debug android_arch=armv7
 scons platform=android target=release android_arch=armv7
 ```
 
-### Running Gradle
+#### Running Gradle
 
-After running SCons, compile the Android Template APKs.
+After running SCons, compile the OUYA template APKs.
 
 ```
 cd platform/android/java
 
 gradlew build
 ```
+
+### macOS Templates
+
+To build macOS export templates, compile with no editor (tools=no) and respectively for release and debug build templates (target=release and target=release_debug).
+
+```
+scons platform=osx tools=no target=release bits=64
+scons platform=osx tools=no target=release_debug bits=64
+```
+
+To create an .app bundle like in the official builds, you need to use the template located in misc/dist/osx_template.app. The release and debug builds should be placed in osx_template.app/Contents/MacOS with the names godot_osx_release.64 and godot_osx_debug.64 respectively. You can do so with the following commands (assuming a universal build, otherwise replace the .universal extension with the one of your arch-specific binaries):
+
+```
+cp -r misc/dist/osx_template.app .
+mkdir -p osx_template.app/Contents/MacOS
+cp bin/godot.osx.opt.64 osx_template.app/Contents/MacOS/godot_osx_release.64
+cp bin/godot.osx.opt.debug.64 osx_template.app/Contents/MacOS/godot_osx_debug.64
+chmod +x osx_template.app/Contents/MacOS/godot_osx*
+```
+
+You can then zip the osx_template.app folder to reproduce the osx.zip template from the official Godot distribution:
+
+```
+zip -q -9 -r osx.zip osx_template.app
+```
+
+#### Export templates
+
+Export templates are downloaded from the GitHub release page: <https://github.com/bherdm/godot-for-ouya/releases>.
+
+Download the official export templates package, rename the .tpz as a .zip file and unzip it. Notice that most are just optimized binaries or packages for each platform:
+
+android_debug.apk
+
+android_release.apk
+
+osx.zip
+
+version.txt
+
+windows_32_debug.exe
+
+windows_32_release.exe
+
+windows_64_debug.exe
+
+windows_64_release.exe
+
+
 
 ## Community
 
