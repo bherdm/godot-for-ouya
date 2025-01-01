@@ -317,7 +317,7 @@ run 64-bit executables, but you still might need to compile for them.
 Using terminal in the root directory of the engine source code:
 
 <details> 
-  <summary>Tip: Parallel Builds</summary>
+  <summary>-j*  Parallel Builds</summary>
 On Macs, and on Windows if you installed "Pywin32 Python Extension," you can append the -j
 command to instruct SCons to run parallel builds like this:
 
@@ -325,21 +325,19 @@ command to instruct SCons to run parallel builds like this:
 scons platform=windows -j9
 ```
 
-In general, it is OK to have at least as many threads compiling Godot as
-you have cores in your CPU, if not one or two more, I use -j9
-(nine threads) for my 8 core CPU, your mileage may vary.
+In general, use half of the number of available CPU threads.
 </details>
 
 #### Windows Editor
 
 ```
-scons platform=windows
+scons platform=windows -j*
 ```
 
 #### mac OS Editor
 
 ```
-scons platform=osx target=release_debug bits=64
+scons platform=osx target=release_debug bits=64 -j*
 
 cp -r misc/dist/osx_tools.app ./godot-for-ouya.app
 mkdir -p godot-for-ouya.app/Contents/MacOS
@@ -347,13 +345,19 @@ cp bin/godot.osx.opt.tools.64 godot-for-ouya.app/Contents/MacOS/Godot
 chmod +x godot-for-ouya.app/Contents/MacOS/Godot
 ```
 
+Move binary to the bin folder:
+
+```
+mv godot-for-ouya.app bin/
+```
+
 ## Compiling Templates
 
 ### OUYA Templates
 
 ```
-scons platform=android target=debug android_arch=armv7
-scons platform=android target=release android_arch=armv7
+scons platform=android target=debug android_arch=armv7 -j*
+scons platform=android target=release android_arch=armv7 -j*
 ```
 
 #### Running Gradle
@@ -362,8 +366,18 @@ After running SCons, compile the OUYA template APKs.
 
 ```
 cd platform/android/java
+```
 
+Windows:
+
+```
 gradlew build
+```
+
+macOS:
+
+```
+./gradlew build
 ```
 
 ### macOS Templates
@@ -371,14 +385,14 @@ gradlew build
 To build macOS export templates, compile with no editor (tools=no) and respectively for release and debug build templates (target=release and target=release_debug).
 
 ```
-scons platform=osx tools=no target=release bits=64
-scons platform=osx tools=no target=release_debug bits=64
+scons platform=osx tools=no target=release -j*
+scons platform=osx tools=no target=release_debug -j*
 ```
 
-To create an .app bundle like in the official builds, you need to use the template located in misc/dist/osx_template.app. The release and debug builds should be placed in osx_template.app/Contents/MacOS with the names godot_osx_release.64 and godot_osx_debug.64 respectively. You can do so with the following commands (assuming a universal build, otherwise replace the .universal extension with the one of your arch-specific binaries):
+To create an .app bundle like in the official builds, you need to use the template located in misc/dist/osx_template.app. The release and debug builds should be placed in osx_template.app/Contents/MacOS with the names godot_osx_release.64 and godot_osx_debug.64 respectively. You can do so with the following commands (assuming a 64 build, otherwise replace the .64 extension with the one of your arch-specific binaries):
 
 ```
-cp -r misc/dist/osx_template.app .
+cp -r misc/dist/osx_template.app ./osx_template.app
 mkdir -p osx_template.app/Contents/MacOS
 cp bin/godot.osx.opt.64 osx_template.app/Contents/MacOS/godot_osx_release.64
 cp bin/godot.osx.opt.debug.64 osx_template.app/Contents/MacOS/godot_osx_debug.64
@@ -391,12 +405,60 @@ You can then zip the osx_template.app folder to reproduce the osx.zip template f
 zip -q -9 -r osx.zip osx_template.app
 ```
 
-#### Export templates
+Move binaries the bin folder:
+
+```
+mv osx_template.app bin/
+mv osx.zip bin/
+```
+
+### Windows Templates
+
+Windows export templates are created by compiling Godot as release, with the following flags:
+
+Mingw32 command prompt:
+
+```
+scons platform=windows tools=no target=release bits=32 -j*
+scons platform=windows tools=no target=release_debug bits=32 -j*
+```
+
+Mingw-w64 command prompt:
+
+```
+scons platform=windows tools=no target=release bits=64 -j*
+scons platform=windows tools=no target=release_debug bits=64 -j*
+```
+
+Visual Studio command prompts for the correct architecture:
+
+```
+scons platform=windows tools=no target=release -j*
+scons platform=windows tools=no target=release_debug -j*
+```
+
+If you plan on replacing the standard templates, copy these to:
+
+```
+C:\USERS\YOURUSER\AppData\Roaming\Godot\Templates
+```
+
+With the following names:
+
+```
+windows_32_debug.exe
+windows_32_release.exe
+windows_64_debug.exe
+windows_64_release.exe
+```
+
+### Packaging templates
 
 Export templates are downloaded from the GitHub release page: <https://github.com/bherdm/godot-for-ouya/releases>.
 
-Download the official export templates package, rename the .tpz as a .zip file and unzip it. Notice that most are just optimized binaries or packages for each platform:
+Download the official export templates package, rename the .tpz as a .zip file and unzip it. Notice that most are just optimized binaries or packages for each platform in a folder named templates:
 
+```
 android_debug.apk
 
 android_release.apk
@@ -412,8 +474,14 @@ windows_32_release.exe
 windows_64_debug.exe
 
 windows_64_release.exe
+```
 
+Zip the folder
+macOS:
 
+```
+zip -q -9 -r templates.tpz templates/*
+```
 
 ## Community
 
