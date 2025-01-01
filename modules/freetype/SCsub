@@ -10,7 +10,6 @@ if (env['builtin_freetype'] != 'no'):
     thirdparty_dir = "#thirdparty/freetype/"
     thirdparty_sources = [
         "src/autofit/autofit.c",
-        "src/base/ftapi.c",
         "src/base/ftbase.c",
         "src/base/ftbbox.c",
         "src/base/ftbdf.c",
@@ -28,7 +27,6 @@ if (env['builtin_freetype'] != 'no'):
         "src/base/ftotval.c",
         "src/base/ftpatent.c",
         "src/base/ftpfr.c",
-        "src/base/ftpic.c",
         "src/base/ftstroke.c",
         "src/base/ftsynth.c",
         "src/base/ftsystem.c",
@@ -40,7 +38,7 @@ if (env['builtin_freetype'] != 'no'):
         "src/cff/cff.c",
         "src/cid/type1cid.c",
         "src/gxvalid/gxvalid.c",
-        "src/gzip/ftgzip.c",
+        #"src/gzip/ftgzip.c",
         "src/lzw/ftlzw.c",
         "src/otvalid/otvalid.c",
         "src/pcf/pcf.c",
@@ -49,6 +47,8 @@ if (env['builtin_freetype'] != 'no'):
         "src/pshinter/pshinter.c",
         "src/psnames/psnames.c",
         "src/raster/raster.c",
+        "src/sdf/sdf.c",
+        "src/svg/svg.c",
         "src/sfnt/sfnt.c",
         "src/smooth/smooth.c",
         "src/truetype/truetype.c",

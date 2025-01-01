@@ -50,14 +50,16 @@ Use UI font if exists, because it has tight vertial metrix and good for UI.
 ## freetype
 
 - Upstream: https://www.freetype.org
-- Version: 2.8.1
+- Version: 2.13.3 (2024)
 - License: FreeType License (BSD-like)
 
 Files extracted from upstream source:
 
-- the src/ folder, stripped of the `Jamfile` files
-- the include/ folder
-- `docs/{FTL.TXT,LICENSE.TXT}`
+- `src/` folder, minus the `dlg` and `tools` subfolders
+  * These files can be removed: `.dat`, `.diff`, `.mk`, `.rc`, `README*`
+  * In `src/gzip/`, keep only `ftgzip.c`
+- `include/` folder, minus the `dlg` subfolder
+- `LICENSE.TXT` and `docs/FTL.TXT`
 
 
 ## glew
