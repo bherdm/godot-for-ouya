@@ -10,13 +10,8 @@ OpenJDK 8<br>
 
 Android SDK Command Line Tools v8.0<br>[Windows](https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zi") - [Mac](https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip")
 
-Godot-for-OUYA Engine + Android Template APKs<br>
-https://github.com/bherdm/godot-for-ouya/releases/tag/ouya-2.1.8
-
-Official Godot Engine 2.1.6-stable Export Templates<br>
-https://github.com/godotengine/godot/releases/tag/2.1.6-stable
-</details>
-
+Godot-for-OUYA Engine + Export Templates<br>
+https://github.com/bherdm/godot-for-ouya/releases/tag/ouya-2.1.9-alpha
 
 ### JDK 8
 
