@@ -6117,7 +6117,7 @@ EditorNode::EditorNode() {
 	g4o_vbc->add_child(ouya_export_help_button);
 	ouya_export_help_button->set_text("OUYA Export Setup Guide");
 	ouya_export_help_button->set_disabled(false);
-	ouya_export_help_button->connect("pressed", this, "_open_link",make_binds("https://github.com/bherdm/godot-for-ouya?tab=readme-ov-file#engine-setup"));
+	ouya_export_help_button->connect("pressed", this, "_open_link",make_binds("https://github.com/bherdm/godot-for-ouya/blob/ouya/README.md"));
 	
 	LinkButton *ouya_world_button = memnew(LinkButton);
 	g4o_vbc->add_child(ouya_world_button);

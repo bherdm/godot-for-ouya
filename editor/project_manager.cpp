@@ -211,6 +211,12 @@ private:
 					f->store_line("[physics_2d]");
 					f->store_line("\n");
 					f->store_line("motion_fix_enabled=true");
+					f->store_line("[display]");
+					f->store_line("\n");
+					f->store_line("width=1280");
+					f->store_line("height=720");
+					f->store_line("stretch_mode=\"viewport\"");
+					f->store_line("stretch_aspect=\"keep\"");
 
 					memdelete(f);
 
