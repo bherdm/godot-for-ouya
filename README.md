@@ -105,7 +105,7 @@ Follow this guide to compile the engine and export templates from source.
 OpenJDK 8<br>
 [Windows](https://adoptium.net/temurin/releases/?os=windows&version=8 "https://adoptium.net/temurin/releases/?os=windows&version=8") - [Mac](https://adoptium.net/temurin/releases/?os=mac&version=8 "https://adoptium.net/temurin/releases/?os=mac&version=8")
 
-Android SDK Command Line Tools v8.0<br>[Windows](https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zi") - [Mac](https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip")
+Android SDK Command Line Tools v8.0 [Online SDK](https://androidsdkmanager.azurewebsites.net/ "https://androidsdkmanager.azurewebsites.net/")<br>[Windows](https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-win-9123335_latest.zi") - [Mac](https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-mac-9123335_latest.zip") - [Linux](https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip "https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip")
 
 Python 2.7.18 32-bit<br>
 https://www.python.org/downloads/release/python-2718/
@@ -151,7 +151,8 @@ Use Powershell to install the necessary Android SDK components.
 
 ```
 cd /wherever/Android/sdk/cmdline-tools/bin
-
+```
+```
 ./sdkmanager "platforms;android-23" "platform-tools" "build-tools;26.0.1" "ndk;17.2.4988734" "sources;android-23"
 ```
 
